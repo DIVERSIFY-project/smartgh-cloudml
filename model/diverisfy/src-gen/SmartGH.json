@@ -1,0 +1,146 @@
+{ "eClass":"net.cloudml.core:CloudMLModel" ,
+ "name":"SmartGH ",
+"providers": [
+{ "eClass":"net.cloudml.core:Provider" ,
+ "name":"minicloud",
+ "credentials":"C:/temp/credentialsOpenstack",
+"properties": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"endPoint",
+ "value":"https://api.sd1.flexiant.net:4442/userapi"}
+]
+}
+]
+,
+"internalComponents": [
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"Hopper",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker pull songhui/smartgh",
+ "startCommand":"sudo cd /var/@instance{name}; echo &quot;./graphhopper.sh web ./maps/dublin-m50.osm&quot; >> run.sh; sudo docker run -i -t -v /var/@instance{name}/run.sh:/opt/gh/run.sh songhui/smartgh:updated-redis-url /bin/bash /opt/gh/run.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"requiredPorts": [
+{ "eClass":"net.cloudml.core:RequiredPort" ,
+ "name":"redisReq",
+ "isLocal":false,
+ "portNumber":"0",
+ "isMandatory":true,
+ "component":"internalComponents[Hopper]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[Hopper]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"SensorProcessor",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker pull songhui/smartgh",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"requiredPorts": [
+{ "eClass":"net.cloudml.core:RequiredPort" ,
+ "name":"redisReq",
+ "isLocal":false,
+ "portNumber":"0",
+ "isMandatory":true,
+ "component":"internalComponents[SensorProcessor]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[SensorProcessor]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"RedisDB",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker run -d -p 6379:6379 redis",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"providedPorts": [
+{ "eClass":"net.cloudml.core:ProvidedPort" ,
+ "name":"redisPrv",
+ "isLocal":false,
+ "portNumber":"0",
+ "component":"internalComponents[RedisDB]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[RedisDB]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+]
+,
+"vms": [
+{ "eClass":"net.cloudml.core:VM" ,
+ "name":"OpenstackMedum",
+ "Region":"RegionOne",
+ "minRam":"0",
+ "maxRam":"0",
+ "minCores":"0",
+ "maxCores":"0",
+ "minStorage":"0",
+ "maxStorage":"0",
+ "os":"ubuntu",
+ "is64os":false,
+ "imageId":"RegionOne/69df9b62-0549-4fce-9ef6-3eb06f34eee8",
+ "privateKey":"mcuser.pem",
+ "groupName":"diversify",
+ "provider":"providers[minicloud]",
+"providedExecutionPlatforms": [
+{ "eClass":"net.cloudml.core:ProvidedExecutionPlatform" ,
+ "name":"ubuntuPrv",
+ "owner":"vms[OpenstackMedum]",
+"offers": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu"}
+]
+}
+]
+}
+]
+,
+"relationships": [
+{ "eClass":"net.cloudml.core:Relationship" ,
+ "name":"Redis2Sensors",
+ "requiredPort":"internalComponents[SensorProcessor]/requiredPorts[redisReq]",
+ "providedPort":"internalComponents[RedisDB]/providedPorts[redisPrv]"}
+]
+}
