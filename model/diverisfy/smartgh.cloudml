@@ -1,48 +1,52 @@
 deployment model SmartGH
-provider minicloud : 'C:/temp/credentialsOpenstack' ('endPoint':'https://api.sd1.flexiant.net:4442/userapi')
+provider openstack_nova : '/home/huis/cloudml-test/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
 
 types{
-	vm OpenstackMedum{
-		provider : minicloud
-		ram : 0..4000, core : 0..1, storage : 0..20
+	vm OpenstackMedium{
+		provider : openstack_nova
+		ram : 2048.., core : 1.., storage : 10..
 		os : 'ubuntu', os64
-		privateKey : 'mcuser.pem'
+		sshKey : 'mcuser',  privateKey : '/home/huis/cloudml-test/mcuser.pem'
 		region : 'RegionOne'
 		imageID : 'RegionOne/69df9b62-0549-4fce-9ef6-3eb06f34eee8'
-		group : 'diversify'
-		provided host ubuntuPrv : offers : ('OS':'Ubuntu') properties:
+		group : 'diversify', securityGroup : 'default'
+		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
 	}
 	
 	internal component SensorProcessor{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smartgh'
+			download: 'sudo docker pull ubuntu'
 		}
 	}
+	
 	
 	internal component Hopper{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smartgh'
-			start: 'sudo cd /var/@instance{name}; echo "./graphhopper.sh web ./maps/dublin-m50.osm" >> run.sh; sudo docker run -i -t -v /var/@instance{name}/run.sh:/opt/gh/run.sh songhui/smartgh:updated-redis-url /bin/bash /opt/gh/run.sh'
+			download: 'echo @instance{name} ; 
+					   sudo docker pull ubuntu'
+			start: 'cd /var/@instance{name}; echo "./graphhopper.sh web ./maps/dublin-m50.osm" >> run.sh; sudo docker run ubuntu /bin/bash /opt/gh/run.sh'
 		}
 	}
 	
 	internal component RedisDB{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
-		provided communication redisPrv
+		provided communication redisPrv:  port: 6379
 		resource DockerImage{
 			download : 'sudo docker run -d -p 6379:6379 redis'
 		}
 	}
 	
-	communication Redis2Sensors{
+	communication Redis2Hopper{
 		from Hopper.redisReq to RedisDB.redisPrv
-		resource DockerRun{
-			download : 'wget -P ~ http://cloudml.org/scripts/linux/ubuntu/config-gh-launcher.sh'
-			install : 'sudo cp ~/config-gh-launcher.sh /var/@instance{requiredEnd/owner/value/name}/; cd /var/@instance{requiredEnd/owner/value/name}; sudo bash config-gh-launcher.sh'
+		client resource DockerRun{
+			download : 'wget -P ~ https://raw.githubusercontent.com/DIVERSIFY-project/smartgh-cloudml/master/scripts/config-gh-launcher.sh'
+			install : 'sudo mkdir /var/@instance{requiredEnd/owner/value/name}; 
+					   sudo cp ~/config-gh-launcher.sh /var/@instance{requiredEnd/owner/value/name}/ ; 
+					   cd /var/@instance{requiredEnd/owner/value/name}; sudo bash config-gh-launcher.sh'
 		}
 	}
 	
@@ -51,7 +55,16 @@ types{
 	}
 	
 }
-
-instances{
+instances{	
+	vm hs_diversify_openstack1 typed OpenstackMedium
+	internal component hopper1 typed Hopper
+	internal component sensor1 typed SensorProcessor
+	internal component redis1 typed RedisDB
+	
+	connect sensor1.redisReq to redis1.redisPrv typed Redis2Sensors
+	connect hopper1.redisReq to redis1.redisPrv typed Redis2Hopper
+	host hopper1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
+	host sensor1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
+	host redis1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	
 }
