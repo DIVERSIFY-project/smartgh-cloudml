@@ -17,7 +17,8 @@ types{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull ubuntu'
+			download: 'sudo docker pull songhui/smhp-sensor'
+			start: 'sudo docker run -i -t -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh'
 		}
 	}
 	
@@ -26,9 +27,8 @@ types{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
 		required communication redisReq
 		resource DockerImage{
-			download: 'echo @instance{name} ; 
-					   sudo docker pull ubuntu'
-			start: 'cd /var/@instance{name}; echo "./graphhopper.sh web ./maps/dublin-m50.osm" >> run.sh; sudo docker run ubuntu /bin/bash /opt/gh/run.sh'
+			download: 'sudo docker pull songhui/smhp-hopper'
+			start: 'sudo docker run -i -t -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-hopper /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
 	
@@ -43,15 +43,15 @@ types{
 	communication Redis2Hopper{
 		from Hopper.redisReq to RedisDB.redisPrv
 		client resource DockerRun{
-			download : 'wget -P ~ https://raw.githubusercontent.com/DIVERSIFY-project/smartgh-cloudml/master/scripts/config-gh-launcher.sh'
-			install : 'sudo mkdir /var/@instance{requiredEnd/owner/value/name}; 
-					   sudo cp ~/config-gh-launcher.sh /var/@instance{requiredEnd/owner/value/name}/ ; 
-					   cd /var/@instance{requiredEnd/owner/value/name}; sudo bash config-gh-launcher.sh'
+			install : 'cd ~ ; echo \'echo \"$2:$3\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
 		}
 	}
 	
 	communication Redis2Sensors{
 		from SensorProcessor.redisReq to RedisDB.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2:$3\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
 	}
 	
 }

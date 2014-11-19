@@ -4,14 +4,14 @@
     <properties name="endPoint" value="http://192.168.1.10:5000/v2.0"/>
   </providers>
   <internalComponents name="SensorProcessor">
-    <resources name="DockerImage" downloadCommand="sudo docker pull ubuntu"/>
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-sensor" startCommand="sudo docker run -i -t -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh"/>
     <requiredPorts name="redisReq" component="//@internalComponents.0"/>
     <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.0">
       <demands name="OS" value="Ubuntu/docker"/>
     </requiredExecutionPlatform>
   </internalComponents>
   <internalComponents name="Hopper">
-    <resources name="DockerImage" downloadCommand="echo @instance{name} ; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   sudo docker pull ubuntu" startCommand="cd /var/@instance{name}; echo &quot;./graphhopper.sh web ./maps/dublin-m50.osm&quot; >> run.sh; sudo docker run ubuntu /bin/bash /opt/gh/run.sh"/>
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-hopper" startCommand="sudo docker run -i -t -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; songhui/smhp-hopper /bin/bash /opt/gh/run_hopper.sh"/>
     <requiredPorts name="redisReq" component="//@internalComponents.1"/>
     <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.1">
       <demands name="OS" value="Ubuntu/docker"/>
@@ -45,12 +45,14 @@
     <providedExecutionPlatformInstances name="ubuntuPrv_hs_diversify_openstack1" owner="//@vmInstances.0" type="//@vms.0/@providedExecutionPlatforms.0"/>
   </vmInstances>
   <relationships name="Redis2Hopper" requiredPort="//@internalComponents.1/@requiredPorts.0" providedPort="//@internalComponents.2/@providedPorts.0">
-    <requiredPortResource name="DockerRun" downloadCommand="wget -P ~ https://raw.githubusercontent.com/DIVERSIFY-project/smartgh-cloudml/master/scripts/config-gh-launcher.sh" installCommand="sudo mkdir /var/@instance{requiredEnd/owner/value/name}; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   sudo cp ~/config-gh-launcher.sh /var/@instance{requiredEnd/owner/value/name}/ ; &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;   cd /var/@instance{requiredEnd/owner/value/name}; sudo bash config-gh-launcher.sh"/>
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2:$3&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
   </relationships>
-  <relationships name="Redis2Sensors" requiredPort="//@internalComponents.0/@requiredPorts.0" providedPort="//@internalComponents.2/@providedPorts.0"/>
-  <relationshipInstances name="NoName10251" type="//@relationships.1" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName46909" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
-  <executesInstances name="NoName22277" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName62776" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName74962" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
+  <relationships name="Redis2Sensors" requiredPort="//@internalComponents.0/@requiredPorts.0" providedPort="//@internalComponents.2/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2:$3&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationshipInstances name="NoName 1328" type="//@relationships.1" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName21789" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
+  <executesInstances name="NoName55766" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName10364" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName50019" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
 </net.cloudml.core:CloudMLModel>

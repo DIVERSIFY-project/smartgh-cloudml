@@ -1,1 +1,1 @@
-echo "cd /opt/gh; bash set-redis-url.sh --url $2:$3;" > run.sh
+echo $3:$4 > $2.redisurl 
