@@ -1,12 +1,12 @@
 deployment model SmartGH
-provider openstack_nova : '/home/huis/cloudml-test/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
+provider openstack_nova : '/Users/fafey/divexp/cloudml-test/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
 
 types{
 	vm OpenstackMedium{
 		provider : openstack_nova
-		ram : 2048.., core : 1.., storage : 10..
+		ram : 4096.., core : 1.., storage : 10..
 		os : 'ubuntu', os64
-		sshKey : 'mcuser',  privateKey : '/home/huis/cloudml-test/mcuser.pem'
+		sshKey : 'mcuser',  privateKey : '/Users/fafey/divexp/cloudml-test/mcuser.pem'
 		region : 'RegionOne'
 		imageID : 'RegionOne/69df9b62-0549-4fce-9ef6-3eb06f34eee8'
 		group : 'diversify', securityGroup : 'default'
@@ -18,19 +18,31 @@ types{
 		required communication redisReq
 		resource DockerImage{
 			download: 'sudo docker pull songhui/smhp-sensor'
-			start: 'sudo docker run -i -t -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh'
 		}
 	}
 	
 	
 	internal component Hopper{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication hopperPrv: port: 8080
 		required communication redisReq
 		resource DockerImage{
 			download: 'sudo docker pull songhui/smhp-hopper'
-			start: 'sudo docker run -i -t -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-hopper /bin/bash /opt/gh/run_hopper.sh'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
+	
+	internal component WebSite{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication hopperReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-web'
+			start: 'sudo docker run -d -e "WS_CONFIG=$(cat @instance{name}.wsurl)" -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh'
+		}
+	}
+	
+
 	
 	internal component RedisDB{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
@@ -43,28 +55,38 @@ types{
 	communication Redis2Hopper{
 		from Hopper.redisReq to RedisDB.redisPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'echo \"$2:$3\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
 		}
 	}
 	
 	communication Redis2Sensors{
 		from SensorProcessor.redisReq to RedisDB.redisPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'echo \"$2:$3\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication Hopper2Web{
+		from WebSite.hopperReq to Hopper.hopperPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
 		}
 	}
 	
 }
 instances{	
 	vm hs_diversify_openstack1 typed OpenstackMedium
-	internal component hopper1 typed Hopper
-	internal component sensor1 typed SensorProcessor
 	internal component redis1 typed RedisDB
+	internal component web1 typed WebSite { properties: ('port':'80')}
+	internal component sensor1 typed SensorProcessor
+	internal component hopper1 typed Hopper 
 	
 	connect sensor1.redisReq to redis1.redisPrv typed Redis2Sensors
 	connect hopper1.redisReq to redis1.redisPrv typed Redis2Hopper
+	connect web1.hopperReq to hopper1.hopperPrv typed Hopper2Web
 	host hopper1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	host sensor1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	host redis1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
+	host web1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	
 }
