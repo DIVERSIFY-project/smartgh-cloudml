@@ -7,15 +7,17 @@ Manually deploy SmartGH with docker:
 #deploy redis, currently redis has to be mapped only to 6379
 sudo docker run -d -p 6379:6379 redis
 
-#deploy sensor processor <redis_ip> is in the form like 192.168.1.11, i.e., pure ip without port
-sudo docker run -d -e "redisurl=<redis_ip>" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh
+#deploy sensor processor, replace 192.168.11.20 with the ip where you deploy redis, no port
+sudo docker run -d -e "redisurl=192.168.11.20" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh
 
-#deploy web services
-sudo docker run -d -e "redisurl=<redis_ip>" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh
+#deploy web service, the first 8080 is changeable
+sudo docker run -d -e "redisurl=192.168.11.20" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh
 
-#deploy website, <ws_url> is in the form like http://192.168.1.11:8080
-sudo docker run -d -e "WS_CONFIG=<ws_url>" -p 80:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh
+#deploy website, replace http://192.168.11.22:8080 with the url where you deploy the web service, with a port this time, and do not forget "http://", the port 80 is changeable
+sudo docker run -d -e "WS_CONFIG=http://192.168.11.21:8080" -p 80:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh
 ```
+
+Now you should be able to use the web-based ui via http://192.168.11.22:80, suppose 192.168.11.22 is where you deploy the website
 
 Build docker images yourself
 ===================
