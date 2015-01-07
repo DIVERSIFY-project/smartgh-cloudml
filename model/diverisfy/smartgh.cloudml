@@ -28,8 +28,8 @@ types{
 		provided communication hopperPrv: port: 8080
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smhp-hopper'
-			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper /bin/bash /opt/gh/run_hopper.sh'
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
 	
