@@ -8,7 +8,7 @@ types{
 		os : 'ubuntu', os64
 		sshKey : 'mcuser',  privateKey : '/Users/fafey/divexp/cloudml-test/mcuser.pem'
 		region : 'RegionOne'
-		imageID : 'RegionOne/69df9b62-0549-4fce-9ef6-3eb06f34eee8'
+		imageID : 'RegionOne/91cbd08b-cd06-4c5e-a98d-1105be24f342'
 		group : 'diversify', securityGroup : 'default'
 		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
 	}
@@ -36,6 +36,7 @@ types{
 	internal component WebSite{
 		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
 		required communication hopperReq
+		provided communication webPrv
 		resource DockerImage{
 			download: 'sudo docker pull songhui/smhp-web'
 			start: 'sudo docker run -d -e "WS_CONFIG=$(cat @instance{name}.wsurl)" -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh'
@@ -49,6 +50,15 @@ types{
 		provided communication redisPrv:  port: 6379
 		resource DockerImage{
 			download : 'sudo docker run -d -p 6379:6379 redis'
+		}
+	}
+	
+	internal component LoadBalancer{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication lbReq
+		resource DockerImage{
+			download : 'sudo docker pull barais/haproxydiversify; rm -f ~/*.lb'
+			start : 'sudo docker run -d -p 82:8080 barais/haproxydiversify /main "$(cat @instance{name}.lb)"'
 		}
 	}
 	
@@ -73,20 +83,36 @@ types{
 		}
 	}
 	
+	communication Web2LB{
+		from LoadBalancer.lbReq to WebSite.webPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'printf \"$2:@instance{providedEnd/owner/value/properties/port};\">>@instance{requiredEnd/owner/value/name}.lb\'>config_lb.sh; sudo bash config_lb.sh'
+		}
+	}
+	
 }
 instances{	
 	vm hs_diversify_openstack1 typed OpenstackMedium
 	internal component redis1 typed RedisDB
-	internal component web1 typed WebSite { properties: ('port':'80')}
+	internal component web1 typed WebSite { properties: ('port':'8081')}
+	internal component web2 typed WebSite { properties: ('port':'8082')}
 	internal component sensor1 typed SensorProcessor
 	internal component hopper1 typed Hopper 
+	internal component lb typed LoadBalancer
 	
 	connect sensor1.redisReq to redis1.redisPrv typed Redis2Sensors
 	connect hopper1.redisReq to redis1.redisPrv typed Redis2Hopper
 	connect web1.hopperReq to hopper1.hopperPrv typed Hopper2Web
+	connect web2.hopperReq to hopper1.hopperPrv typed Hopper2Web
+	
+	connect lb.lbReq to web1.webPrv typed Web2LB
+	connect lb.lbReq to web2.webPrv typed Web2LB
+	
 	host hopper1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	host sensor1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	host redis1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	host web1.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
+	host web2.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
+	host lb.ubuntuReq on hs_diversify_openstack1.ubuntuPrv
 	
 }
