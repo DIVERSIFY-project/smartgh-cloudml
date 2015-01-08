@@ -17,7 +17,13 @@ sudo docker run -d -e "redisurl=192.168.11.20" -p 8080:8080 songhui/smhp-hopper-
 sudo docker run -d -e "WS_CONFIG=http://192.168.11.21:8080" -p 80:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh
 ```
 
-Now you should be able to use the web-based ui via http://192.168.11.22:80, suppose 192.168.11.22 is where you deploy the website
+Now you should be able to use the web-based ui via http://192.168.11.22:80, suppose 192.168.11.22 is where you deploy the website.
+
+If you are using boot2docker, the ip can be obtained by:
+
+```
+boot2docker ip
+```
 
 Build docker images yourself
 ===================
