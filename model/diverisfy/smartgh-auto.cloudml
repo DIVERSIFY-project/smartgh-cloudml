@@ -1,0 +1,221 @@
+deployment model SmartGHAuto
+provider openstack_nova : '/home/huis/cloudml-test/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
+
+types{
+	vm OpenStackLarge{
+		provider : openstack_nova
+		ram : 4096.., core : 1.., storage : 10..
+		os : 'ubuntu', os64
+		sshKey : 'mcuser',  privateKey : '/home/huis/cloudml-test/mcuser.pem'
+		region : 'RegionOne'
+		imageID : 'RegionOne/91cbd08b-cd06-4c5e-a98d-1105be24f342'
+		group : 'diversify', securityGroup : 'default'
+		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
+	}
+	
+	vm OpenStackHuge{
+		provider : openstack_nova
+		ram : 8192.., core : 2.., storage : 10..
+		os : 'ubuntu', os64
+		sshKey : 'mcuser',  privateKey : '/home/huis/cloudml-test/mcuser.pem'
+		region : 'RegionOne'
+		imageID : 'RegionOne/91cbd08b-cd06-4c5e-a98d-1105be24f342'
+		group : 'diversify', securityGroup : 'default'
+		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
+	}
+	
+	internal component NoiseSensor{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-sensor'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh'
+		}
+	}
+	
+	internal component PollutionSensor{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-sensor'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh'
+		}
+	}
+	
+	
+	internal component BasicHopper{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication hopperPrv: port: 8080
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+		}
+	}
+	
+	internal component FootHopper{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication hopperPrv: port: 8080
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+		}
+	}
+	
+	internal component FastCH{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication hopperPrv: port: 8080
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+		}
+	}
+	
+	internal component NormalCH{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication hopperPrv: port: 8080
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+		}
+	}
+	
+	internal component Web{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication hopperReq
+		provided communication webPrv
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-web'
+			start: 'sudo docker run -d -e "WS_CONFIG=$(cat @instance{name}.wsurl)" -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh'
+		}
+	}
+	
+
+	
+	internal component LocalRedis{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication redisPrv:  port: 6379
+		resource DockerImage{
+			download : 'sudo docker run -d -p 6379:6379 redis'
+		}
+	}
+	
+	internal component Lb{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication lbReq
+		resource DockerImage{
+			download : 'sudo docker pull barais/haproxydiversify; rm -f ~/*.lb'
+			start : 'sudo docker run -d -p 80:8080 -p 8000:8000 -p 8099:8099 -e MY_IP=$(cat myip) songhui/haproxydiversify  /main "$(cat @instance{name}.lb)"'
+		}
+	}
+	
+	communication BasicHopper2LocalRedis{
+		from BasicHopper.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication FootHopper2LocalRedis{
+		from FootHopper.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication FastCH2LocalRedis{
+		from FastCH.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication NormalCH2LocalRedis{
+		from NormalCH.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication NoiseSensor2LocalRedis{
+		from NoiseSensor.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication PollutionSensor2LocalRedis{
+		from PollutionSensor.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	communication Web2BasicHopper{
+		from Web.hopperReq to BasicHopper.hopperPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+		}
+	}
+	
+	communication Web2FootHopper{
+		from Web.hopperReq to FootHopper.hopperPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+		}
+	}
+	
+	communication Web2FastCH{
+		from Web.hopperReq to FastCH.hopperPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+		}
+	}
+	
+	communication Web2NormalCH{
+		from Web.hopperReq to NormalCH.hopperPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+		}
+	}
+	
+	communication Lb2Web{
+		from Lb.lbReq to Web.webPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'printf \"$2:@instance{providedEnd/owner/value/properties/port};\">>@instance{requiredEnd/owner/value/name}.lb ; printf \"$1\">myip\'>config_lb.sh; sudo bash config_lb.sh'
+		}
+	}
+	
+}
+
+
+instances{ 
+	vm vm02 typed OpenStackLarge
+	vm vm00 typed OpenStackLarge
+	
+	internal component hopper00 typed NormalCH
+	internal component hopper01 typed FootHopper
+	internal component web01 typed Web { properties: ('port' : '8083')}
+	internal component web00 typed Web { properties: ('port' : '8081')}
+	internal component localRedis02 typed LocalRedis
+	internal component lb00 typed Lb
+	
+	
+	connect hopper00.redisReq to localRedis02.redisPrv typed NormalCH2LocalRedis
+	connect hopper01.redisReq to localRedis02.redisPrv typed FootHopper2LocalRedis
+	connect web01.hopperReq to hopper00.hopperPrv typed Web2NormalCH
+	connect web00.hopperReq to hopper01.hopperPrv typed Web2FootHopper
+	connect lb00.lbReq to web01.webPrv typed Lb2Web
+	connect lb00.lbReq to web00.webPrv typed Lb2Web
+	
+	host hopper00.ubuntuReq on vm00.ubuntuPrv
+	host hopper01.ubuntuReq on vm02.ubuntuPrv
+	host web01.ubuntuReq on vm00.ubuntuPrv
+	host web00.ubuntuReq on vm00.ubuntuPrv
+	host localRedis02.ubuntuReq on vm00.ubuntuPrv
+	host lb00.ubuntuReq on vm02.ubuntuPrv
+	
+}
