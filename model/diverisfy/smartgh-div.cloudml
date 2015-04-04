@@ -8,7 +8,7 @@ types{
 		os : 'ubuntu', os64
 		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
 		region : 'RegionOne'
-		imageID : 'RegionOne/d5298bd0-04df-463e-9252-8249bd8f9e6f'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
 		group : 'diversify', securityGroup : 'default'
 		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
 	}
@@ -19,7 +19,7 @@ types{
 		os : 'ubuntu', os64
 		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
 		region : 'RegionOne'
-		imageID : 'RegionOne/d5298bd0-04df-463e-9252-8249bd8f9e6f'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
 		group : 'diversify', securityGroup : 'default'
 		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
 	}
@@ -192,7 +192,7 @@ types{
 }
 
 instances{ 
-	vm vm01 typed OpenStackHuge
+	vm vm01 typed OpenStackLarge
 	
 	internal component hopper00 typed FastCH { properties: ('hport' : '8093')}
 	internal component web01 typed Web { properties: ('port' : '8083') ('tag' : 'default')}
