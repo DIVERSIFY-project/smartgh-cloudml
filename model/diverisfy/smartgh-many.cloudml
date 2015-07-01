@@ -1,0 +1,127 @@
+deployment model SmartGHMany
+provider openstack_nova : '/opt/cloudml/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
+
+types{
+	vm OpenStackLarge{
+		provider : openstack_nova
+		ram : 4096.., core : 1.., storage : 10..
+		os : 'ubuntu', os64
+		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
+		region : 'RegionOne'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
+		group : 'diversify', securityGroup : 'default'
+		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
+	}
+	
+	vm OpenStackHuge{
+		provider : openstack_nova
+		ram : 8192.., core : 2.., storage : 10..
+		os : 'ubuntu', os64
+		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
+		region : 'RegionOne'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
+		group : 'diversify', securityGroup : 'default'
+		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
+	}
+	
+	internal component NoiseSensor{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-sensor'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh'
+		}
+	}	
+	
+	internal component BasicHopper{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication hopperPrv: port: 8080
+		required communication redisReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p @instance{properties/hport}:8080 songhui/smhp-hopper-trim-scratch /bin/bash /run_hopper.sh'
+		}
+	}
+	
+	
+	internal component Web{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication hopperReq
+		provided communication webPrv
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-web'
+			start: 'sudo docker run -d -e "WS_CONFIG=$(cat @instance{name}.wsurl)" -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh'
+		}
+	}
+	
+
+	
+	internal component LocalRedis{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		provided communication redisPrv:  port: 6379
+		resource DockerImage{
+			download : 'sudo docker run -d -p 6379:6379 redis'
+		}
+	}
+	
+	internal component Lb{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication lbReq
+		resource DockerImage{
+			download : 'sudo docker pull songhui/haproxydiversify; rm -f ~/*.lb'
+			start : 'sudo docker run -d -p 80:8080 -p 8000:8000 -p 8099:8099 -e MY_IP=$(cat myip) songhui/haproxydiversify  /main "$(cat @instance{name}.lb)"'
+		}
+	}
+	
+	communication BasicHopper2LocalRedis{
+		from BasicHopper.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	
+	communication NoiseSensor2LocalRedis{
+		from NoiseSensor.redisReq to LocalRedis.redisPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"$2\">@instance{requiredEnd/owner/value/name}.redisurl\'>config_redisurl.sh; sudo bash config_redisurl.sh'
+		}
+	}
+	
+	
+	communication Web2BasicHopper{
+		from Web.hopperReq to BasicHopper.hopperPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'echo \"http://$2:@instance{providedEnd/owner/value/properties/hport}\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+		}
+	}
+	
+	communication Lb2Web{
+		from Lb.lbReq to Web.webPrv
+		client resource DockerRun{
+			install : 'cd ~ ; echo \'printf \"$2:@instance{providedEnd/owner/value/properties/port}#@instance{providedEnd/owner/value/properties/tag};\">>@instance{requiredEnd/owner/value/name}.lb ; printf \"$1\">myip\'>config_lb.sh; sudo bash config_lb.sh'
+		}
+	}
+	
+}
+
+instances{ 
+	vm vm01 typed OpenStackLarge
+	
+	internal component hopper00 typed BasicHopper { properties: ('hport' : '8080')}
+	internal component localRedis00 typed LocalRedis
+	internal component hopper01 typed BasicHopper { properties: ('hport' : '8081')}
+	internal component hopper02 typed BasicHopper { properties: ('hport' : '8082')}
+	
+	
+	connect hopper00.redisReq to localRedis00.redisPrv typed BasicHopper2LocalRedis
+	connect hopper01.redisReq to localRedis00.redisPrv typed BasicHopper2LocalRedis
+	connect hopper02.redisReq to localRedis00.redisPrv typed BasicHopper2LocalRedis
+	
+	host hopper00.ubuntuReq on vm01.ubuntuPrv
+	host hopper01.ubuntuReq on vm01.ubuntuPrv
+	host hopper02.ubuntuReq on vm01.ubuntuPrv
+	host localRedis00.ubuntuReq on vm01.ubuntuPrv
+	
+	
+}

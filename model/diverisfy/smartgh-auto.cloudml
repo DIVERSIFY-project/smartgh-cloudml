@@ -8,7 +8,7 @@ types{
 		os : 'ubuntu', os64
 		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
 		region : 'RegionOne'
-		imageID : 'RegionOne/5fcc34b6-e736-48a0-ad85-51a36fb79d83'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
 		group : 'diversify', securityGroup : 'default'
 		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
 	}
@@ -19,7 +19,7 @@ types{
 		os : 'ubuntu', os64
 		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
 		region : 'RegionOne'
-		imageID : 'RegionOne/5fcc34b6-e736-48a0-ad85-51a36fb79d83'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
 		group : 'diversify', securityGroup : 'default'
 		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
 	}
@@ -49,7 +49,7 @@ types{
 		required communication redisReq
 		resource DockerImage{
 			download: 'sudo docker pull songhui/smhp-hopper-tomcat'
-			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p @instance{properties/hport}:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
 	
@@ -58,8 +58,8 @@ types{
 		provided communication hopperPrv: port: 8080
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/hopperconf/foot.config.properties '
-			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 -v @instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/foot.config.properties '
+			start: 'cd ~; sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
 	
@@ -68,8 +68,8 @@ types{
 		provided communication hopperPrv: port: 8080
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/hopperconf/car.config.properties '
-			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 -v @instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/noinst.config.properties '
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
 	
@@ -78,8 +78,8 @@ types{
 		provided communication hopperPrv: port: 8080
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/hopperconf/car.config.properties '
-			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p 8080:8080 -v @instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/car.config.properties '
+			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}
 	
@@ -157,67 +157,67 @@ types{
 	communication Web2BasicHopper{
 		from Web.hopperReq to BasicHopper.hopperPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+			install : 'cd ~ ; echo \'echo \"http://$2:@instance{providedEnd/owner/value/properties/hport}\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
 		}
 	}
 	
 	communication Web2FootHopper{
 		from Web.hopperReq to FootHopper.hopperPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+			install : 'cd ~ ; echo \'echo \"http://$2:@instance{providedEnd/owner/value/properties/hport}\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
 		}
 	}
 	
 	communication Web2FastCH{
 		from Web.hopperReq to FastCH.hopperPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+			install : 'cd ~ ; echo \'echo \"http://$2:@instance{providedEnd/owner/value/properties/hport}\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
 		}
 	}
 	
 	communication Web2NormalCH{
 		from Web.hopperReq to NormalCH.hopperPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'echo \"http://$2:$3\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
+			install : 'cd ~ ; echo \'echo \"http://$2:@instance{providedEnd/owner/value/properties/hport}\">@instance{requiredEnd/owner/value/name}.wsurl\'>config_ws.sh; sudo bash config_ws.sh'
 		}
 	}
 	
 	communication Lb2Web{
 		from Lb.lbReq to Web.webPrv
 		client resource DockerRun{
-			install : 'cd ~ ; echo \'printf \"$2:@instance{providedEnd/owner/value/properties/port};\">>@instance{requiredEnd/owner/value/name}.lb ; printf \"$1\">myip\'>config_lb.sh; sudo bash config_lb.sh'
+			install : 'cd ~ ; echo \'printf \"$2:@instance{providedEnd/owner/value/properties/port}#@instance{providedEnd/owner/value/properties/tag};\">>@instance{requiredEnd/owner/value/name}.lb ; printf \"$1\">myip\'>config_lb.sh; sudo bash config_lb.sh'
 		}
 	}
 	
 }
 
 instances{ 
-	vm vm01 typed OpenStackLarge
+	vm vm02 typed OpenStackLarge
 	vm vm00 typed OpenStackLarge
 	
 	internal component hopper00 typed FastCH { properties: ('hport' : '8093')}
-	internal component web01 typed Web { properties: ('port' : '8083') ('tag' : 'default')}
-	internal component web00 typed Web { properties: ('port' : '8081') ('tag' : 'car')}
-	internal component sensor01 typed PollutionSensor
+	internal component web03 typed Web { properties: ('port' : '8084') ('tag' : 'fast')}
+	internal component web00 typed Web { properties: ('port' : '8083') ('tag' : 'foot')}
+	internal component sensor02 typed PollutionSensor
 	internal component localRedis00 typed LocalRedis
 	internal component lb00 typed Lb
-	internal component hopper01 typed BasicHopper { properties: ('hport' : '8092')}
+	internal component hopper01 typed FootHopper { properties: ('hport' : '8092')}
 	
 	
 	connect hopper00.redisReq to localRedis00.redisPrv typed FastCH2LocalRedis
-	connect hopper01.redisReq to localRedis00.redisPrv typed BasicHopper2LocalRedis
-	connect sensor01.redisReq to localRedis00.redisPrv typed PollutionSensor2LocalRedis
-	connect web01.hopperReq to hopper01.hopperPrv typed Web2BasicHopper
-	connect web00.hopperReq to hopper00.hopperPrv typed Web2FastCH
-	connect lb00.lbReq to web01.webPrv typed Lb2Web
+	connect hopper01.redisReq to localRedis00.redisPrv typed FootHopper2LocalRedis
+	connect sensor02.redisReq to localRedis00.redisPrv typed PollutionSensor2LocalRedis
+	connect web03.hopperReq to hopper00.hopperPrv typed Web2FastCH
+	connect web00.hopperReq to hopper01.hopperPrv typed Web2FootHopper
+	connect lb00.lbReq to web03.webPrv typed Lb2Web
 	connect lb00.lbReq to web00.webPrv typed Lb2Web
 	
-	host hopper00.ubuntuReq on vm01.ubuntuPrv
-	host web01.ubuntuReq on vm01.ubuntuPrv
+	host hopper00.ubuntuReq on vm02.ubuntuPrv
+	host web03.ubuntuReq on vm02.ubuntuPrv
 	host web00.ubuntuReq on vm00.ubuntuPrv
-	host sensor01.ubuntuReq on vm00.ubuntuPrv
+	host sensor02.ubuntuReq on vm00.ubuntuPrv
 	host localRedis00.ubuntuReq on vm00.ubuntuPrv
-	host lb00.ubuntuReq on vm00.ubuntuPrv
+	host lb00.ubuntuReq on vm02.ubuntuPrv
 	host hopper01.ubuntuReq on vm00.ubuntuPrv
 	
 }

@@ -1,4 +1,4 @@
-deployment model SmartGHDiv
+deployment model SmartGHDiv 
 provider openstack_nova : '/opt/cloudml/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
 
 types{
@@ -68,7 +68,7 @@ types{
 		provided communication hopperPrv: port: 8080
 		required communication redisReq
 		resource DockerImage{
-			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/car.config.properties '
+			download: 'sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/noinst.config.properties '
 			start: 'sudo docker run -d -e "redisurl=$(cat @instance{name}.redisurl)" -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh'
 		}
 	}

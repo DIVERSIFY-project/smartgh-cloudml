@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ASCII"?>
+<net.cloudml.core:CloudMLModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:net.cloudml.core="http://cloudml.net/core" name="SmartGHAuto">
+  <providers name="openstack-nova" credentials="/opt/cloudml/credentialsOpenstack">
+    <properties name="endPoint" value="http://192.168.1.10:5000/v2.0"/>
+  </providers>
+  <internalComponents name="NoiseSensor">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-sensor" startCommand="sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh"/>
+    <requiredPorts name="redisReq" component="//@internalComponents.0"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.0">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="PollutionSensor">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-sensor" startCommand="sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh"/>
+    <requiredPorts name="redisReq" component="//@internalComponents.1"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.1">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="BasicHopper">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-hopper-tomcat" startCommand="sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; -p @instance{properties/hport}:8080 songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh"/>
+    <providedPorts name="hopperPrv" component="//@internalComponents.2" portNumber="8080"/>
+    <requiredPorts name="redisReq" component="//@internalComponents.2"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.2">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="FootHopper">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/foot.config.properties " startCommand="cd ~; sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh"/>
+    <providedPorts name="hopperPrv" component="//@internalComponents.3" portNumber="8080"/>
+    <requiredPorts name="redisReq" component="//@internalComponents.3"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.3">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="FastCH">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/noinst.config.properties " startCommand="sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh"/>
+    <providedPorts name="hopperPrv" component="//@internalComponents.4" portNumber="8080"/>
+    <requiredPorts name="redisReq" component="//@internalComponents.4"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.4">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="NormalCH">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-hopper-tomcat; cd ~; wget -O @instance{name}.config.properties http://thingml.org/dist/diversify/smartgh/car.config.properties " startCommand="sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; -p @instance{properties/hport}:8080 -v $(pwd)/@instance{name}.config.properties:/opt/gh/config.properties songhui/smhp-hopper-tomcat /bin/bash /opt/gh/run_hopper.sh"/>
+    <providedPorts name="hopperPrv" component="//@internalComponents.5" portNumber="8080"/>
+    <requiredPorts name="redisReq" component="//@internalComponents.5"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.5">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="Web">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-web" startCommand="sudo docker run -d -e &quot;WS_CONFIG=$(cat @instance{name}.wsurl)&quot; -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh"/>
+    <providedPorts name="webPrv" component="//@internalComponents.6"/>
+    <requiredPorts name="hopperReq" component="//@internalComponents.6"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.6">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="LocalRedis">
+    <resources name="DockerImage" downloadCommand="sudo docker run -d -p 6379:6379 redis"/>
+    <providedPorts name="redisPrv" component="//@internalComponents.7" portNumber="6379"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.7">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="Lb">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/haproxydiversify; rm -f ~/*.lb" startCommand="sudo docker run -d -p 80:8080 -p 8000:8000 -p 8099:8099 -e MY_IP=$(cat myip) songhui/haproxydiversify  /main &quot;$(cat @instance{name}.lb)&quot;"/>
+    <requiredPorts name="lbReq" component="//@internalComponents.8"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.8">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponentInstances name="hopper00" type="//@internalComponents.4">
+    <properties name="hport" value="8093"/>
+    <providedPortInstances name="hopperPrv_hopper00" type="//@internalComponents.4/@providedPorts.0" componentInstance="//@internalComponentInstances.0"/>
+    <requiredPortInstances name="redisReq_hopper00" type="//@internalComponents.4/@requiredPorts.0" componentInstance="//@internalComponentInstances.0"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_hopper00" owner="//@internalComponentInstances.0" type="//@internalComponents.4/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <internalComponentInstances name="web03" type="//@internalComponents.6">
+    <properties name="port" value="8084"/>
+    <properties name="tag" value="fast"/>
+    <providedPortInstances name="webPrv_web03" type="//@internalComponents.6/@providedPorts.0" componentInstance="//@internalComponentInstances.1"/>
+    <requiredPortInstances name="hopperReq_web03" type="//@internalComponents.6/@requiredPorts.0" componentInstance="//@internalComponentInstances.1"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_web03" owner="//@internalComponentInstances.1" type="//@internalComponents.6/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <internalComponentInstances name="web00" type="//@internalComponents.6">
+    <properties name="port" value="8083"/>
+    <properties name="tag" value="foot"/>
+    <providedPortInstances name="webPrv_web00" type="//@internalComponents.6/@providedPorts.0" componentInstance="//@internalComponentInstances.2"/>
+    <requiredPortInstances name="hopperReq_web00" type="//@internalComponents.6/@requiredPorts.0" componentInstance="//@internalComponentInstances.2"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_web00" owner="//@internalComponentInstances.2" type="//@internalComponents.6/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <internalComponentInstances name="sensor02" type="//@internalComponents.1">
+    <requiredPortInstances name="redisReq_sensor02" type="//@internalComponents.1/@requiredPorts.0" componentInstance="//@internalComponentInstances.3"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_sensor02" owner="//@internalComponentInstances.3" type="//@internalComponents.1/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <internalComponentInstances name="localRedis00" type="//@internalComponents.7">
+    <providedPortInstances name="redisPrv_localRedis00" type="//@internalComponents.7/@providedPorts.0" componentInstance="//@internalComponentInstances.4"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_localRedis00" owner="//@internalComponentInstances.4" type="//@internalComponents.7/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <internalComponentInstances name="lb00" type="//@internalComponents.8">
+    <requiredPortInstances name="lbReq_lb00" type="//@internalComponents.8/@requiredPorts.0" componentInstance="//@internalComponentInstances.5"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_lb00" owner="//@internalComponentInstances.5" type="//@internalComponents.8/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <internalComponentInstances name="hopper01" type="//@internalComponents.3">
+    <properties name="hport" value="8092"/>
+    <providedPortInstances name="hopperPrv_hopper01" type="//@internalComponents.3/@providedPorts.0" componentInstance="//@internalComponentInstances.6"/>
+    <requiredPortInstances name="redisReq_hopper01" type="//@internalComponents.3/@requiredPorts.0" componentInstance="//@internalComponentInstances.6"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_hopper01" owner="//@internalComponentInstances.6" type="//@internalComponents.3/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <vms name="OpenStackLarge" provider="//@providers.0" Region="RegionOne" minRam="4096" minCores="1" minStorage="10" os="ubuntu" imageId="RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb" securityGroup="default" sshKey="mcuser" privateKey="/opt/cloudml/mcuser.pem" groupName="diversify">
+    <providedExecutionPlatforms name="ubuntuPrv" owner="//@vms.0">
+      <offers name="OS" value="Ubuntu/docker"/>
+    </providedExecutionPlatforms>
+  </vms>
+  <vms name="OpenStackHuge" provider="//@providers.0" Region="RegionOne" minRam="8192" minCores="2" minStorage="10" os="ubuntu" imageId="RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb" securityGroup="default" sshKey="mcuser" privateKey="/opt/cloudml/mcuser.pem" groupName="diversify">
+    <providedExecutionPlatforms name="ubuntuPrv" owner="//@vms.1">
+      <offers name="OS" value="Ubuntu/docker"/>
+    </providedExecutionPlatforms>
+  </vms>
+  <vmInstances name="vm02" type="//@vms.0">
+    <providedExecutionPlatformInstances name="ubuntuPrv_vm02" owner="//@vmInstances.0" type="//@vms.0/@providedExecutionPlatforms.0"/>
+  </vmInstances>
+  <vmInstances name="vm00" type="//@vms.0">
+    <providedExecutionPlatformInstances name="ubuntuPrv_vm00" owner="//@vmInstances.1" type="//@vms.0/@providedExecutionPlatforms.0"/>
+  </vmInstances>
+  <relationships name="BasicHopper2LocalRedis" requiredPort="//@internalComponents.2/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationships name="FootHopper2LocalRedis" requiredPort="//@internalComponents.3/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationships name="FastCH2LocalRedis" requiredPort="//@internalComponents.4/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationships name="NormalCH2LocalRedis" requiredPort="//@internalComponents.5/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationships name="NoiseSensor2LocalRedis" requiredPort="//@internalComponents.0/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationships name="PollutionSensor2LocalRedis" requiredPort="//@internalComponents.1/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
+  </relationships>
+  <relationships name="Web2BasicHopper" requiredPort="//@internalComponents.6/@requiredPorts.0" providedPort="//@internalComponents.2/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;http://$2:@instance{providedEnd/owner/value/properties/hport}&quot;>@instance{requiredEnd/owner/value/name}.wsurl'>config_ws.sh; sudo bash config_ws.sh"/>
+  </relationships>
+  <relationships name="Web2FootHopper" requiredPort="//@internalComponents.6/@requiredPorts.0" providedPort="//@internalComponents.3/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;http://$2:@instance{providedEnd/owner/value/properties/hport}&quot;>@instance{requiredEnd/owner/value/name}.wsurl'>config_ws.sh; sudo bash config_ws.sh"/>
+  </relationships>
+  <relationships name="Web2FastCH" requiredPort="//@internalComponents.6/@requiredPorts.0" providedPort="//@internalComponents.4/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;http://$2:@instance{providedEnd/owner/value/properties/hport}&quot;>@instance{requiredEnd/owner/value/name}.wsurl'>config_ws.sh; sudo bash config_ws.sh"/>
+  </relationships>
+  <relationships name="Web2NormalCH" requiredPort="//@internalComponents.6/@requiredPorts.0" providedPort="//@internalComponents.5/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;http://$2:@instance{providedEnd/owner/value/properties/hport}&quot;>@instance{requiredEnd/owner/value/name}.wsurl'>config_ws.sh; sudo bash config_ws.sh"/>
+  </relationships>
+  <relationships name="Lb2Web" requiredPort="//@internalComponents.8/@requiredPorts.0" providedPort="//@internalComponents.6/@providedPorts.0">
+    <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'printf &quot;$2:@instance{providedEnd/owner/value/properties/port}#@instance{providedEnd/owner/value/properties/tag};&quot;>>@instance{requiredEnd/owner/value/name}.lb ; printf &quot;$1&quot;>myip'>config_lb.sh; sudo bash config_lb.sh"/>
+  </relationships>
+  <relationshipInstances name="NoName84022" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName52734" type="//@relationships.1" requiredPortInstance="//@internalComponentInstances.6/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName93570" type="//@relationships.5" requiredPortInstance="//@internalComponentInstances.3/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName17229" type="//@relationships.8" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName13752" type="//@relationships.7" requiredPortInstance="//@internalComponentInstances.2/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.6/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName14222" type="//@relationships.10" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.1/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName54645" type="//@relationships.10" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
+  <executesInstances name="NoName18921" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName96872" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName46557" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName88029" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.3/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName80844" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.4/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName60858" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.5/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName34325" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.6/@requiredExecutionPlatformInstance"/>
+</net.cloudml.core:CloudMLModel>

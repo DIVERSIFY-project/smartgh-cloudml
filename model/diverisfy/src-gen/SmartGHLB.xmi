@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ASCII"?>
+<net.cloudml.core:CloudMLModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:net.cloudml.core="http://cloudml.net/core" name="SmartGHLB">
+  <providers name="openstack-nova" credentials="/opt/cloudml/credentialsOpenstack">
+    <properties name="endPoint" value="http://192.168.1.10:5000/v2.0"/>
+  </providers>
+  <internalComponents name="Web">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/smhp-web" startCommand="sudo docker run -d -e &quot;WS_CONFIG=$(cat @instance{name}.wsurl)&quot; -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh"/>
+    <requiredPorts name="pylbReq" component="//@internalComponents.0"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.0">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <internalComponents name="Lb">
+    <resources name="DockerImage" downloadCommand="sudo docker pull songhui/haproxydiversify; rm -f ~/*.lb" startCommand="sudo docker run -d -p 80:8080 -p 8000:8000 -p 8099:8099 -e MY_IP=$(cat myip) songhui/haproxydiversify  /main &quot;$(cat @instance{name}.lb)&quot;"/>
+    <requiredPorts name="lbReq" component="//@internalComponents.1"/>
+    <requiredExecutionPlatform name="ubuntuReq" owner="//@internalComponents.1">
+      <demands name="OS" value="Ubuntu/docker"/>
+    </requiredExecutionPlatform>
+  </internalComponents>
+  <externalComponents name="PyLB" provider="//@providers.0" endPoint="http://">
+    <providedPorts name="pylbPrv" component="//@externalComponents.0"/>
+  </externalComponents>
+  <internalComponentInstances name="web00" type="//@internalComponents.0">
+    <properties name="port" value="8083"/>
+    <properties name="tag" value="foot"/>
+    <requiredPortInstances name="pylbReq_web00" type="//@internalComponents.0/@requiredPorts.0" componentInstance="//@internalComponentInstances.0"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_web00" owner="//@internalComponentInstances.0" type="//@internalComponents.0/@requiredExecutionPlatform"/>
+  </internalComponentInstances>
+  <externalComponentInstances name="pylb" type="//@externalComponents.0">
+    <providedPortInstances name="pylbPrv_pylb" type="//@externalComponents.0/@providedPorts.0" componentInstance="//@externalComponentInstances.0"/>
+  </externalComponentInstances>
+  <vms name="OpenStackLarge" provider="//@providers.0" endPoint="http://" Region="RegionOne" minRam="4096" minCores="1" minStorage="10" os="ubuntu" imageId="RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb" securityGroup="default" sshKey="mcuser" privateKey="/opt/cloudml/mcuser.pem" groupName="diversify">
+    <providedExecutionPlatforms name="ubuntuPrv" owner="//@vms.0">
+      <offers name="OS" value="Ubuntu/docker"/>
+    </providedExecutionPlatforms>
+  </vms>
+  <vmInstances name="vm00" type="//@vms.0">
+    <providedExecutionPlatformInstances name="ubuntuPrv_vm00" owner="//@vmInstances.0" type="//@vms.0/@providedExecutionPlatforms.0"/>
+  </vmInstances>
+  <relationships name="WebToPyLB" requiredPort="//@internalComponents.0/@requiredPorts.0" providedPort="//@externalComponents.0/@providedPorts.0"/>
+  <relationshipInstances name="NoName27020" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@externalComponentInstances.0/@providedPortInstances.0"/>
+  <executesInstances name="NoName17930" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
+</net.cloudml.core:CloudMLModel>

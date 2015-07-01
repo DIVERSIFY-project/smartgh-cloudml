@@ -1,0 +1,60 @@
+deployment model SmartGHLB
+provider openstack_nova : '/opt/cloudml/credentialsOpenstack' ('endPoint':'http://192.168.1.10:5000/v2.0')
+
+types{
+	vm OpenStackLarge{
+		provider : openstack_nova
+		ram : 4096.., core : 1.., storage : 10..
+		os : 'ubuntu', os64
+		sshKey : 'mcuser',  privateKey : '/opt/cloudml/mcuser.pem'
+		region : 'RegionOne'
+		imageID : 'RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb'
+		group : 'diversify', securityGroup : 'default'
+		provided host ubuntuPrv : offers : ('OS':'Ubuntu/docker') properties:
+	}
+	
+	
+	internal component Web{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+
+		required communication pylbReq
+		resource DockerImage{
+			download: 'sudo docker pull songhui/smhp-web'
+			start: 'sudo docker run -d -e "WS_CONFIG=$(cat @instance{name}.wsurl)" -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh'
+		}
+	}
+	
+	internal component Lb{
+		required host ubuntuReq : demands : ('OS':'Ubuntu/docker') properties:
+		required communication lbReq
+		resource DockerImage{
+			download : 'sudo docker pull songhui/haproxydiversify; rm -f ~/*.lb'
+			start : 'sudo docker run -d -p 80:8080 -p 8000:8000 -p 8099:8099 -e MY_IP=$(cat myip) songhui/haproxydiversify  /main "$(cat @instance{name}.lb)"'
+		}
+	}
+	
+	external component PyLB{
+		provider:openstack_nova
+		provided communication pylbPrv
+	}
+	
+	communication WebToPyLB{
+		from Web.pylbReq to PyLB.pylbPrv
+	}
+	
+}
+instances{ 
+	
+	vm vm00 typed OpenStackLarge
+	
+	internal component web00 typed Web { properties: ('port' : '8083') ('tag' : 'foot')}
+	external component pylb typed PyLB
+	
+	
+	connect web00.pylbReq to pylb.pylbPrv typed WebToPyLB
+	
+	
+	
+	host web00.ubuntuReq on vm00.ubuntuPrv
+	
+}

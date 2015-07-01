@@ -1,0 +1,455 @@
+{ "eClass":"net.cloudml.core:CloudMLModel" ,
+ "name":"SmartGHMany ",
+"providers": [
+{ "eClass":"net.cloudml.core:Provider" ,
+ "name":"openstack-nova",
+ "credentials":"/opt/cloudml/credentialsOpenstack",
+"properties": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"endPoint",
+ "value":"http://192.168.1.10:5000/v2.0"}
+]
+}
+]
+,
+"internalComponents": [
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"NoiseSensor",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker pull songhui/smhp-sensor",
+ "startCommand":"sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; songhui/smhp-sensor /bin/bash /opt/gh/run_sensor.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"requiredPorts": [
+{ "eClass":"net.cloudml.core:RequiredPort" ,
+ "name":"redisReq",
+ "isLocal":false,
+ "portNumber":"0",
+ "isMandatory":true,
+ "component":"internalComponents[NoiseSensor]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[NoiseSensor]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"BasicHopper",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker pull songhui/smhp-hopper-tomcat",
+ "startCommand":"sudo docker run -d -e &quot;redisurl=$(cat @instance{name}.redisurl)&quot; -p @instance{properties/hport}:8080 songhui/smhp-hopper-trim-scratch /bin/bash /run_hopper.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"providedPorts": [
+{ "eClass":"net.cloudml.core:ProvidedPort" ,
+ "name":"hopperPrv",
+ "isLocal":false,
+ "portNumber":"8080",
+ "component":"internalComponents[BasicHopper]"}
+]
+,
+"requiredPorts": [
+{ "eClass":"net.cloudml.core:RequiredPort" ,
+ "name":"redisReq",
+ "isLocal":false,
+ "portNumber":"0",
+ "isMandatory":true,
+ "component":"internalComponents[BasicHopper]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[BasicHopper]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"Web",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker pull songhui/smhp-web",
+ "startCommand":"sudo docker run -d -e &quot;WS_CONFIG=$(cat @instance{name}.wsurl)&quot; -p @instance{properties/port}:8989 songhui/smhp-web /bin/bash /opt/gh/run_web.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"providedPorts": [
+{ "eClass":"net.cloudml.core:ProvidedPort" ,
+ "name":"webPrv",
+ "isLocal":false,
+ "portNumber":"0",
+ "component":"internalComponents[Web]"}
+]
+,
+"requiredPorts": [
+{ "eClass":"net.cloudml.core:RequiredPort" ,
+ "name":"hopperReq",
+ "isLocal":false,
+ "portNumber":"0",
+ "isMandatory":true,
+ "component":"internalComponents[Web]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[Web]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"Lb",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker pull songhui/haproxydiversify; rm -f ~/*.lb",
+ "startCommand":"sudo docker run -d -p 80:8080 -p 8000:8000 -p 8099:8099 -e MY_IP=$(cat myip) songhui/haproxydiversify  /main &quot;$(cat @instance{name}.lb)&quot;",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"requiredPorts": [
+{ "eClass":"net.cloudml.core:RequiredPort" ,
+ "name":"lbReq",
+ "isLocal":false,
+ "portNumber":"0",
+ "isMandatory":true,
+ "component":"internalComponents[Lb]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[Lb]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponent" ,
+ "name":"LocalRedis",
+"resources": [
+{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerImage",
+ "downloadCommand":"sudo docker run -d -p 6379:6379 redis",
+ "requireCredentials":false,
+ "executeLocally":false}
+]
+,
+"providedPorts": [
+{ "eClass":"net.cloudml.core:ProvidedPort" ,
+ "name":"redisPrv",
+ "isLocal":false,
+ "portNumber":"6379",
+ "component":"internalComponents[LocalRedis]"}
+]
+,
+"requiredExecutionPlatform":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatform" ,
+ "name":"ubuntuReq",
+ "owner":"internalComponents[LocalRedis]",
+"demands": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+}
+]
+,
+"internalComponentInstances": [
+{ "eClass":"net.cloudml.core:InternalComponentInstance" ,
+ "name":"localRedis00",
+ "type":"internalComponents[LocalRedis]",
+"providedPortInstances": [
+{ "eClass":"net.cloudml.core:ProvidedPortInstance" ,
+ "name":"redisPrv_localRedis00",
+ "type":"internalComponents[LocalRedis]/providedPorts[redisPrv]"}
+]
+,
+"requiredExecutionPlatformInstance":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatformInstance" ,
+ "name":"ubuntuReq_localRedis00",
+ "owner":"internalComponentInstances[localRedis00]",
+ "type":"internalComponents[LocalRedis]/requiredExecutionPlatform[ubuntuReq]"}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponentInstance" ,
+ "name":"hopper02",
+ "type":"internalComponents[BasicHopper]",
+"properties": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"hport",
+ "value":"8082"}
+]
+,
+"providedPortInstances": [
+{ "eClass":"net.cloudml.core:ProvidedPortInstance" ,
+ "name":"hopperPrv_hopper02",
+ "type":"internalComponents[BasicHopper]/providedPorts[hopperPrv]"}
+]
+,
+"requiredPortInstances": [
+{ "eClass":"net.cloudml.core:RequiredPortInstance" ,
+ "name":"redisReq_hopper02",
+ "type":"internalComponents[BasicHopper]/requiredPorts[redisReq]"}
+]
+,
+"requiredExecutionPlatformInstance":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatformInstance" ,
+ "name":"ubuntuReq_hopper02",
+ "owner":"internalComponentInstances[hopper02]",
+ "type":"internalComponents[BasicHopper]/requiredExecutionPlatform[ubuntuReq]"}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponentInstance" ,
+ "name":"hopper01",
+ "type":"internalComponents[BasicHopper]",
+"properties": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"hport",
+ "value":"8081"}
+]
+,
+"providedPortInstances": [
+{ "eClass":"net.cloudml.core:ProvidedPortInstance" ,
+ "name":"hopperPrv_hopper01",
+ "type":"internalComponents[BasicHopper]/providedPorts[hopperPrv]"}
+]
+,
+"requiredPortInstances": [
+{ "eClass":"net.cloudml.core:RequiredPortInstance" ,
+ "name":"redisReq_hopper01",
+ "type":"internalComponents[BasicHopper]/requiredPorts[redisReq]"}
+]
+,
+"requiredExecutionPlatformInstance":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatformInstance" ,
+ "name":"ubuntuReq_hopper01",
+ "owner":"internalComponentInstances[hopper01]",
+ "type":"internalComponents[BasicHopper]/requiredExecutionPlatform[ubuntuReq]"}
+}
+,
+{ "eClass":"net.cloudml.core:InternalComponentInstance" ,
+ "name":"hopper00",
+ "type":"internalComponents[BasicHopper]",
+"properties": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"hport",
+ "value":"8080"}
+]
+,
+"providedPortInstances": [
+{ "eClass":"net.cloudml.core:ProvidedPortInstance" ,
+ "name":"hopperPrv_hopper00",
+ "type":"internalComponents[BasicHopper]/providedPorts[hopperPrv]"}
+]
+,
+"requiredPortInstances": [
+{ "eClass":"net.cloudml.core:RequiredPortInstance" ,
+ "name":"redisReq_hopper00",
+ "type":"internalComponents[BasicHopper]/requiredPorts[redisReq]"}
+]
+,
+"requiredExecutionPlatformInstance":
+{ "eClass":"net.cloudml.core:RequiredExecutionPlatformInstance" ,
+ "name":"ubuntuReq_hopper00",
+ "owner":"internalComponentInstances[hopper00]",
+ "type":"internalComponents[BasicHopper]/requiredExecutionPlatform[ubuntuReq]"}
+}
+]
+,
+"vms": [
+{ "eClass":"net.cloudml.core:VM" ,
+ "name":"OpenStackHuge",
+ "Region":"RegionOne",
+ "minRam":"8192",
+ "maxRam":"0",
+ "minCores":"2",
+ "maxCores":"0",
+ "minStorage":"10",
+ "maxStorage":"0",
+ "os":"ubuntu",
+ "is64os":false,
+ "imageId":"RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb",
+ "securityGroup":"default",
+ "sshKey":"mcuser",
+ "privateKey":"/opt/cloudml/mcuser.pem",
+ "groupName":"diversify",
+ "provider":"providers[openstack-nova]",
+"providedExecutionPlatforms": [
+{ "eClass":"net.cloudml.core:ProvidedExecutionPlatform" ,
+ "name":"ubuntuPrv",
+ "owner":"vms[OpenStackHuge]",
+"offers": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+]
+}
+,
+{ "eClass":"net.cloudml.core:VM" ,
+ "name":"OpenStackLarge",
+ "Region":"RegionOne",
+ "minRam":"4096",
+ "maxRam":"0",
+ "minCores":"1",
+ "maxCores":"0",
+ "minStorage":"10",
+ "maxStorage":"0",
+ "os":"ubuntu",
+ "is64os":false,
+ "imageId":"RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb",
+ "securityGroup":"default",
+ "sshKey":"mcuser",
+ "privateKey":"/opt/cloudml/mcuser.pem",
+ "groupName":"diversify",
+ "provider":"providers[openstack-nova]",
+"providedExecutionPlatforms": [
+{ "eClass":"net.cloudml.core:ProvidedExecutionPlatform" ,
+ "name":"ubuntuPrv",
+ "owner":"vms[OpenStackLarge]",
+"offers": [
+{ "eClass":"net.cloudml.core:Property" ,
+ "name":"OS",
+ "value":"Ubuntu/docker"}
+]
+}
+]
+}
+]
+,
+"vmInstances": [
+{ "eClass":"net.cloudml.core:VMInstance" ,
+ "name":"vm01",
+ "type":"vms[OpenStackLarge]",
+"providedExecutionPlatformInstances": [
+{ "eClass":"net.cloudml.core:ProvidedExecutionPlatformInstance" ,
+ "name":"ubuntuPrv_vm01",
+ "owner":"vmInstances[vm01]",
+ "type":"vms[OpenStackLarge]/providedExecutionPlatforms[ubuntuPrv]"}
+]
+}
+]
+,
+"relationships": [
+{ "eClass":"net.cloudml.core:Relationship" ,
+ "name":"NoiseSensor2LocalRedis",
+ "requiredPort":"internalComponents[NoiseSensor]/requiredPorts[redisReq]",
+ "providedPort":"internalComponents[LocalRedis]/providedPorts[redisPrv]",
+"requiredPortResource":{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerRun",
+ "installCommand":"cd ~ ; echo &apos;echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl&apos;>config_redisurl.sh; sudo bash config_redisurl.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+}
+,
+{ "eClass":"net.cloudml.core:Relationship" ,
+ "name":"Web2BasicHopper",
+ "requiredPort":"internalComponents[Web]/requiredPorts[hopperReq]",
+ "providedPort":"internalComponents[BasicHopper]/providedPorts[hopperPrv]",
+"requiredPortResource":{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerRun",
+ "installCommand":"cd ~ ; echo &apos;echo &quot;http://$2:@instance{providedEnd/owner/value/properties/hport}&quot;>@instance{requiredEnd/owner/value/name}.wsurl&apos;>config_ws.sh; sudo bash config_ws.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+}
+,
+{ "eClass":"net.cloudml.core:Relationship" ,
+ "name":"Lb2Web",
+ "requiredPort":"internalComponents[Lb]/requiredPorts[lbReq]",
+ "providedPort":"internalComponents[Web]/providedPorts[webPrv]",
+"requiredPortResource":{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerRun",
+ "installCommand":"cd ~ ; echo &apos;printf &quot;$2:@instance{providedEnd/owner/value/properties/port}#@instance{providedEnd/owner/value/properties/tag};&quot;>>@instance{requiredEnd/owner/value/name}.lb ; printf &quot;$1&quot;>myip&apos;>config_lb.sh; sudo bash config_lb.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+}
+,
+{ "eClass":"net.cloudml.core:Relationship" ,
+ "name":"BasicHopper2LocalRedis",
+ "requiredPort":"internalComponents[BasicHopper]/requiredPorts[redisReq]",
+ "providedPort":"internalComponents[LocalRedis]/providedPorts[redisPrv]",
+"requiredPortResource":{ "eClass":"net.cloudml.core:Resource" ,
+ "name":"DockerRun",
+ "installCommand":"cd ~ ; echo &apos;echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl&apos;>config_redisurl.sh; sudo bash config_redisurl.sh",
+ "requireCredentials":false,
+ "executeLocally":false}
+}
+]
+,
+"relationshipInstances": [
+{ "eClass":"net.cloudml.core:RelationshipInstance" ,
+ "name":"NoName22567",
+ "type":"relationships[BasicHopper2LocalRedis]",
+ "requiredPortInstance":"internalComponentInstances[hopper00]/requiredPortInstances[redisReq_hopper00]",
+ "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
+,
+{ "eClass":"net.cloudml.core:RelationshipInstance" ,
+ "name":"NoName 6605",
+ "type":"relationships[BasicHopper2LocalRedis]",
+ "requiredPortInstance":"internalComponentInstances[hopper01]/requiredPortInstances[redisReq_hopper01]",
+ "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
+,
+{ "eClass":"net.cloudml.core:RelationshipInstance" ,
+ "name":"NoName61571",
+ "type":"relationships[BasicHopper2LocalRedis]",
+ "requiredPortInstance":"internalComponentInstances[hopper02]/requiredPortInstances[redisReq_hopper02]",
+ "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
+]
+,
+"executesInstances": [
+{ "eClass":"net.cloudml.core:ExecuteInstance" ,
+ "name":"NoName41178",
+ "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
+ "requiredExecutionPlatformInstance":"internalComponentInstances[localRedis00]/requiredExecutionPlatformInstance[ubuntuReq_localRedis00]"}
+,
+{ "eClass":"net.cloudml.core:ExecuteInstance" ,
+ "name":"NoName14953",
+ "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
+ "requiredExecutionPlatformInstance":"internalComponentInstances[hopper00]/requiredExecutionPlatformInstance[ubuntuReq_hopper00]"}
+,
+{ "eClass":"net.cloudml.core:ExecuteInstance" ,
+ "name":"NoName 6315",
+ "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
+ "requiredExecutionPlatformInstance":"internalComponentInstances[hopper01]/requiredExecutionPlatformInstance[ubuntuReq_hopper01]"}
+,
+{ "eClass":"net.cloudml.core:ExecuteInstance" ,
+ "name":"NoName 7279",
+ "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
+ "requiredExecutionPlatformInstance":"internalComponentInstances[hopper02]/requiredExecutionPlatformInstance[ubuntuReq_hopper02]"}
+]
+}
