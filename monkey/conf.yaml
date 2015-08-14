@@ -1,0 +1,13 @@
+interval : 5
+trail : 
+  file : random_select
+  function : random_select
+  dist_name : poisson
+  dist_paras : { lam : 0.3 }
+rescue : 
+  file : random_select
+  function : random_select
+  dist_name : poisson
+  dist_paras : {lam : 0.3}
+
+  
