@@ -6,6 +6,10 @@ import numpy
 import yaml
 import inspect
 
+def resolve_func(func_config):
+  if type(func_config) is str:
+    return lambda : func_config
+
 docker = local["docker"]
 
 dead_time = dict()
