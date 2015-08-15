@@ -1,13 +1,16 @@
 interval : 5
 trail : 
-  file : random_select
+  module: random_select
   function : random_select
-  dist_name : poisson
-  dist_paras : { lam : 0.3 }
+  reserve_first_arg : True
+  number: 
+    module: numpy.random
+    function : poisson
+    lam : 0.5 
 rescue : 
-  file : random_select
+  module : random_select
   function : random_select
-  dist_name : poisson
-  dist_paras : {lam : 0.3}
+  reserve_first_arg: True
+  number : 1
 
   

@@ -1,14 +1,12 @@
 from plumbum import local
 from time import sleep
 from random import sample
+from monkeylib import resolve_func
 
 import numpy
 import yaml
 import inspect
 
-def resolve_func(func_config):
-  if type(func_config) is str:
-    return lambda : func_config
 
 docker = local["docker"]
 
@@ -19,6 +17,9 @@ alive_time = dict()
 conf_file = file('conf.yaml', 'r')
 config = yaml.load(conf_file)
 
+
+func_trail = resolve_func(config['trail'])
+func_rescue = resolve_func(config['rescue'])
 
 
 cycle = 0
@@ -60,27 +61,9 @@ while True :
 
   #print alive_time
   #print dead_time
-  result = dict()
-  for trail_or_rescue in ['trail', 'rescue']:
-    conf = config[trail_or_rescue]  
-    exec('import %s' % conf['file'])
-    func = eval('%s.%s'%(conf['file'], conf['function']))
-
-
-    arg_names = inspect.getargspec(func)[0]
-    args = dict()  
-    for x in arg_names:
-      if x in conf:
-        args[x] = conf[x]
-    if trail_or_rescue == 'trail':
-      args['containers_time'] = alive_time
-    else:
-      args['containers_time'] = dead_time
-    
-    result[trail_or_rescue] = func(**args)
    
-  tostop = result['trail']
-  tostart = result['rescue']
+  tostop = func_trail(alive_time)
+  tostart = func_rescue(dead_time)
   print 'To stop: %s' % tostop
   print 'To start: %s' % tostart
 
