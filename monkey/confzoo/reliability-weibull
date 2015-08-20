@@ -1,12 +1,14 @@
 interval : 5
 failure : 
   module: basic_algos
-  function : random_select
+  function : by_reliability
   reserve_first_arg : True
-  number: 
-    module: numpy.random
-    function : poisson
-    lam : (0.05 * len(samples))
+  reliability : 
+    module : basic_algos
+    function : weibull_reliability_age
+    reserve_first_arg: True
+    shape : 0.8
+    scale : 20
 recovery : 
   module : basic_algos
   function : by_age

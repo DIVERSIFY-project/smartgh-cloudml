@@ -1,5 +1,5 @@
 interval : 5
-trail : 
+failure : 
   module: basic_algos
   function : by_age
   reserve_first_arg : True
@@ -8,7 +8,7 @@ trail :
     function : two_param_weibull
     shape : 0.8
     scale : 20
-rescue : 
+recovery : 
   module : basic_algos
   function : by_age
   reserve_first_arg: True

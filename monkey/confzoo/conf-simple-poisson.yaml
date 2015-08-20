@@ -1,10 +1,10 @@
 interval : 5
-trail : 
+failure : 
   module: basic_algos
   function : simple_poisson
   reserve_first_arg : True
   single_rate : 0.05
-rescue : 
+recovery : 
   module : basic_algos
   function : by_age
   reserve_first_arg: True
