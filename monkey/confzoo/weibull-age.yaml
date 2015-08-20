@@ -1,0 +1,17 @@
+interval : 5
+trail : 
+  module: basic_algos
+  function : by_age
+  reserve_first_arg : True
+  lifespan : 
+    module : basic_algos
+    function : two_param_weibull
+    shape : 0.8
+    scale : 20
+rescue : 
+  module : basic_algos
+  function : by_age
+  reserve_first_arg: True
+  lifespan : 3
+
+  
