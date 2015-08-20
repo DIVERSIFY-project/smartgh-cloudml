@@ -7,6 +7,8 @@ import numpy
 import yaml
 import inspect
 import sys
+import time
+import datetime
 from monkeylog import Logger
 
 docker = local["docker"]
@@ -23,10 +25,11 @@ conf_file = file(config_file_path, 'r')
 config = yaml.load(conf_file)
 
 
-func_trail = resolve_func(config['trail'])
-func_rescue = resolve_func(config['rescue'])
+func_trail = resolve_func(config['failure'])
+func_rescue = resolve_func(config['recovery'])
 
-logger = Logger(config_file_path.split('/')[-1].split(".")[0])
+timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('-%Y%m%d-%H%M%S')
+logger = Logger(config_file_path.split('/')[-1].split(".")[0]+timestamp)
 
 cycle = 0
 #Main loop

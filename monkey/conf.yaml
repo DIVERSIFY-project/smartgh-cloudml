@@ -1,15 +1,14 @@
 interval : 5
-trail : 
+failure : 
   module: basic_algos
-  function : by_reliability
+  function : by_age
   reserve_first_arg : True
-  reliability : 
+  lifespan : 
     module : basic_algos
-    function : weibull_reliability_age
-    reserve_first_arg: True
-    shape : 0.8
+    function : two_param_weibull
+    shape : 1.5
     scale : 20
-rescue : 
+recovery : 
   module : basic_algos
   function : by_age
   reserve_first_arg: True
