@@ -39,6 +39,9 @@ Configuration
 
 The agent can be configured in different perspectives, such as the interval between cycles, the failure model, the recovery model, etc. A configuration file writen in YAML is mandatory to run the agent. 
 
+First example
+---------
+
 A simplest configuration can be the follows:
 
 ``` yaml
@@ -65,4 +68,57 @@ def random_select(samples, number):
 ```
 The first argument is the containers, and since it is reserved, we do not need to provide any value. The second argument is the number of containers to select each time, and set it to be 1 in the configuration. The monkey will randomly select one container and stop it in each cycle.
 
-The recovery function is also one defined in ```basic_algos```, and it selects all the containers that has been stopped for 3 or more cycles, and re-start them. Here ''3'' is the number we provide for the argument ```lifespan```.
+The recovery function is also one defined in ```basic_algos```, and it selects all the containers that has been stopped for 3 or more cycles, and re-start them. Here ''3'' is the number we provide for the argument ```lifespan```. The physical meaning of this recovery function is simple: it simulates a situation where every container is able to recover itself after it fails, but this recovery process lasts for 3 cycles time.
+
+Second example
+-----------
+
+The first example is too simple. The failure model does not make sense statistically. So we make the second example (with only the failure part), which still randomly selects some containers to fail, but the number of containers to select is randomly generated following the poisson distribution.
+
+``` yaml
+failure :
+  module: basic_algos
+  function : random_select
+  reserve_first_arg : True
+  number:
+    module: numpy.random
+    function : poisson
+    lam : 0.8
+```
+
+The main ```failure``` function is the same as before, but its parameter is no long a simple value, but another function which is defined by a dictionary. This is a function defined by numpy (which means that the numpy package need to be installed or included in the PYTHONPATH), which generates a random poisson-distributed integer with a shape value 0.8. 
+
+The meaning of this failure function is that, we expect in average 0.8 containers to fail in each cycle. The failure of containers occurs independenly with each other, and does not directly depends on how long it has been running. The funciton works well when there are a large number of containers and the number does not vary a lot as time goes on. Otherwise, we need a slightly different ```lam``` value which is dependent to the number of currently alive containers.
+
+``` yaml
+failure :
+  module: basic_algos
+  function : random_select
+  reserve_first_arg : True
+  number:
+    module: numpy.random
+    function : poisson
+    lam : (0.05 * len(samples))
+```
+
+Here we used yet another different way to assign a value to the ```lam``` parameter: instead of a direct value or a function defined as a dictionary, we write a python expresson surrounded by "()". The variable ```samples``` is the name of the first parameter for the failure function. Now the meaning is that in each cycle, 5% of the alive containers might fail.
+
+Third example
+============
+
+In this example, we would like to fail containers based on their ages. The same function ```basic_algos.by_age``` in the first example is still useful here, but instead of a flat lifespan of 3, we will give each container a random life span when it is born, and when that time comes, the container will be selected to stop.
+
+``` python
+failure :
+  module: basic_algos
+  function : by_age
+  reserve_first_arg : True
+  lifespan :
+    module : basic_algos
+    function : two_param_weibull
+    shape : 1.5
+    scale : 20
+ ```
+
+Here we use a two-parameter weibull generator, which we wrote on the base of the first parameter ```numpy.random.weibull```. The ```shape``` parameter determines whether a component will failure densely in the beginning (```shape < 1```) or when it is getting old ```shape>1```). The ```scale``` is also called the "charasteristic life", and by setting it to be 20, we mean that approximately 63% of the containers will die before they reach the age 20, and this is irrelavant to the shape.
+
