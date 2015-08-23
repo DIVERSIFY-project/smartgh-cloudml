@@ -1,5 +1,6 @@
 import numpy
 import random
+from collections import deque
 from monkeylib import resolve_func
 
 def random_select(samples, number):
@@ -34,7 +35,28 @@ def by_reliability(samples, reliability):
     if random.random() > r:
       result.append(c)
   return result
+
+selection_queue = deque()
+queue_cooldown = 0
+def by_queue(samples, reload_time):
+  global selection_queue
+  global queue_cooldown
+  if queue_cooldown > 0: queue_cooldown -= 1
+  for c in samples:
+    if not c in selection_queue:
+      selection_queue.append(c)
+  if queue_cooldown > 0:
+    return []
+  try:
+    c = selection_queue.popleft()
+    print '>>>>current queue: %s' % selection_queue
+    queue_cooldown = reload_time
+    return [c]
+  except:
+    return []
   
+  
+
 def simple_poisson(samples, single_rate):
   return random_select(samples, {'module':'numpy.random', 'function':'poisson', 'lam':single_rate*len(samples)})
 

@@ -10,8 +10,8 @@ failure :
     scale : 20
 recovery : 
   module : basic_algos
-  function : by_age
+  function : by_queue
   reserve_first_arg: True
-  lifespan : 3
+  reload_time : 3
 
   

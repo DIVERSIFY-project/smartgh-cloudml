@@ -6,13 +6,15 @@ Install and Launch
 Environment
 -----------
 
-- Docker
+- Docker 1.0.1+
 - Python 2.7.x
 - Required libraries for the main program
   * pyYAML
   * plumbum
 - Required libraries for extension algorithms so far
   * numpy
+- Require libraries for data processing and visualisation (which means not really required)
+  * matplotlib
 
 Python libraries can be install through 
 
@@ -32,7 +34,7 @@ The config file is optional, and if is not provided, the default 'conf.yaml' fil
 Logs
 ---------
 
-Log files can be found in ./logs/configname-timestamp.log, which currently records the running and stopped containers in each cycle.
+Log files can be found in ./logs/configname-timestamp.log, which currently records the running and stopped containers in each cycle. It is open to the extension functions to log new information during running.
 
 Configuration
 ================
@@ -58,17 +60,18 @@ recovery :
   lifespan : 3
 ```
 
-The configuration is a dictionary (or a "map" as in Java) written in YAML. The first item (i.e., key-value pair) ```interval``` defines the length of each cycle, in seconds. The following two items, ```failure``` and ```recover``` defines two functions used by the main agent to select the containers to fail and to recovery, respectively. 
+The configuration is a dictionary (or a "map" as in Java) written in YAML. The first item (i.e., key-value pair) ```interval``` defines the length of each cycle, in seconds. The following two items, ```failure``` and ```recover``` defines two functions used by the main agent to select the containers to fail and to recover, respectively. 
 
 Each function is defined by a dictionary. In each dictionary, three items are reserved, i.e.,  ```module```,  ```function```, and ```reserve_first_arg```. The first two items defines where to find the function, and of course the module should be reachable from the current PYTHONPATH. If ```reserve_first_arg``` is true, then the first argument of this function will be fed by the agent, or any other code that call this function, and thus it is not necessary (nor allowed) to assign a value to the first argument. For each of the other arguments, we need to assign it a value, as an item in the function-defining dictionary. 
 
 Going back to the example, the ```failure``` function is ```random_select```, defined in the module [basic_algos](https://github.com/DIVERSIFY-project/smartgh-cloudml/blob/master/monkey/basic_algos.py). The module contains some predefined functions. The ```random_select``` function is defined as:
 ``` python
 def random_select(samples, number):
+  ...
 ```
-The first argument is the containers, and since it is reserved, we do not need to provide any value. The second argument is the number of containers to select each time, and set it to be 1 in the configuration. The monkey will randomly select one container and stop it in each cycle.
+The first argument is the sample containers from which we select results, and since it is reserved, we do not need to provide any value. The second argument is the number of containers to select each time, and we set it to be 1 in the configuration. The monkey will randomly select one container and stop it in each cycle.
 
-The recovery function is also one defined in ```basic_algos```, and it selects all the containers that has been stopped for 3 or more cycles, and re-start them. Here ''3'' is the number we provide for the argument ```lifespan```. The physical meaning of this recovery function is simple: it simulates a situation where every container is able to recover itself after it fails, but this recovery process lasts for 3 cycles time.
+The recovery function is also one defined in ```basic_algos```, and it selects all the containers that has been stopped for 3 or more cycles, and re-start them. Here ''3'' is the number we provide for the argument ```lifespan```. The physical meaning of this recovery function is simple: it simulates a situation where every container is able to recover itself after it fails, but this recovery process lasts for 3 cycles.
 
 Second example
 -----------
@@ -104,11 +107,11 @@ failure :
 Here we used yet another different way to assign a value to the ```lam``` parameter: instead of a direct value or a function defined as a dictionary, we write a python expresson surrounded by "()". The variable ```samples``` is the name of the first parameter for the failure function. Now the meaning is that in each cycle, 5% of the alive containers might fail.
 
 Third example
-============
+------------
 
 In this example, we would like to fail containers based on their ages. The same function ```basic_algos.by_age``` in the first example is still useful here, but instead of a flat lifespan of 3, we will give each container a random life span when it is born, and when that time comes, the container will be selected to stop.
 
-``` python
+``` yaml
 failure :
   module: basic_algos
   function : by_age
@@ -120,5 +123,30 @@ failure :
     scale : 20
  ```
 
-Here we use a two-parameter weibull generator, which we wrote on the base of the first parameter ```numpy.random.weibull```. The ```shape``` parameter determines whether a component will failure densely in the beginning (```shape < 1```) or when it is getting old ```shape>1```). The ```scale``` is also called the "charasteristic life", and by setting it to be 20, we mean that approximately 63% of the containers will die before they reach the age 20, and this is irrelavant to the shape.
+Here we use a two-parameter weibull generator, which we wrote on the base of the single parameter ```numpy.random.weibull```. The ```shape``` parameter determines whether a component will failure densely in the beginning (```shape < 1```) or when it is getting old (```shape>1```). The ```scale``` is also called the "charasteristic life", and by setting it to be 20, we mean that approximately 63% of the containers will die before they reach the age 20, and this "63%" is irrelavant to the shape.
 
+Reference of functions
+==============
+
+Selection functions
+------------------
+
+``` yaml
+- #Randomly select <number> items from the provided samples
+  module: basic_algos
+  function : random_select 
+  reserve_first_arg : True #sample to select
+  number: <int> #number of items to select each time
+- #Select all items older than <lifespan>
+  module: basic_algos
+  function : by_age
+  reserve_first_arg : True
+  lifespan : <int> #age to dead for a individual item
+- #Select one by one, each after a reload time
+  module: basic_algos
+  function : by_queue
+  reserve_first_arg : True
+  reload_time: <int> #After a reload_time, another item can be selected
+```
+
+More functions are still to be added. 
