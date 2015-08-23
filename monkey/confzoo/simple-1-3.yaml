@@ -1,0 +1,12 @@
+interval : 2 
+failure :    
+  module: basic_algos
+  function : random_select
+  reserve_first_arg : True
+  number: 1
+recovery : 
+  module : basic_algos
+  function : by_age
+  reserve_first_arg: True
+  lifespan : 3
+

@@ -125,6 +125,19 @@ failure :
 
 Here we use a two-parameter weibull generator, which we wrote on the base of the single parameter ```numpy.random.weibull```. The ```shape``` parameter determines whether a component will failure densely in the beginning (```shape < 1```) or when it is getting old (```shape>1```). The ```scale``` is also called the "charasteristic life", and by setting it to be 20, we mean that approximately 63% of the containers will die before they reach the age 20, and this "63%" is irrelavant to the shape.
 
+Fourth example
+--------------
+
+The last example has the same failure model based on weibull distributed lives, but instead of restart all the stopped containers every 3 cycles, it put the stopped containers in a queue, and restart only one from the queue at each cycle. It simulates the situation where fixing a failed component is a manual job that takes 3 cycles, but there is only one person who can fix only one container at each time.
+
+``` yaml
+recovery :
+  module : basic_algos
+  function : by_queue
+  reserve_first_arg: True
+  reload_time : 3
+```
+
 Reference of functions
 ==============
 

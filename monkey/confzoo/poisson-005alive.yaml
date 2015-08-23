@@ -1,13 +1,12 @@
 interval : 2
 failure : 
   module: basic_algos
-  function : by_age
+  function : random_select
   reserve_first_arg : True
-  lifespan : 
-    module : basic_algos
-    function : two_param_weibull
-    shape : 1.5
-    scale : 20
+  number: 
+    module: numpy.random
+    function : poisson
+    lam : (0.05 * len(samples))
 recovery : 
   module : basic_algos
   function : by_age
