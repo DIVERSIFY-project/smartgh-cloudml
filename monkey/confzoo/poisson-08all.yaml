@@ -1,4 +1,4 @@
-interval : 5
+interval : 10
 failure : 
   module: basic_algos
   function : random_select
@@ -6,7 +6,7 @@ failure :
   number: 
     module: numpy.random
     function : poisson
-    lam : (0.05 * len(samples))
+    lam : 0.8
 recovery : 
   module : basic_algos
   function : by_age

@@ -8,7 +8,6 @@ def random_select(samples, number):
     return []
   func = resolve_func(number, samples)
 
-
   num_to_select = func()
   if (type(num_to_select) is list) and len(num_to_select)>0:
     num_to_select = num_to_select[0]
