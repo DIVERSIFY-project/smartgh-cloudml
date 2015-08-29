@@ -1,0 +1,14 @@
+---
+cycle: 0
+running: [ecstatic_goldstine, stoic_thompson, cranky_lumiere, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [grave_heisenberg, hungry_mcclintock, nostalgic_carson, high_albattani, romantic_fermat]
+tostart: []
+tostop: []
+---
+cycle: 1
+running: [ecstatic_goldstine, stoic_thompson, cranky_lumiere, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [grave_heisenberg, hungry_mcclintock, nostalgic_carson, high_albattani, romantic_fermat]
+tostart: []
+tostop: []

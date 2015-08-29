@@ -3,6 +3,7 @@ from plumbum import local
 
 docker_ps_a = local["docker"]["ps"]["-a"]
 grep = local["grep"]
+static_metas = None
 
 class ContainerMeta:
   def __init__(self, line):
@@ -30,7 +31,13 @@ def check_meta(metadict):
           raise Exception('Not a list')
       except Error as e:
         raise Exception(e, 'Container meta file format error at %s/%s' % (k, mkeyword))
-      
+
+def init_static_meta(meta_file_path)
+  meta_file = file(meta_file_path, 'r')
+  static_metas = yaml.load(meta_file)
+  check_meta(static_metas)
+
+
 
 def container_name(id):
   return container_meta[id].name

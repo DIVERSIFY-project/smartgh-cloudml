@@ -3,7 +3,7 @@
 from plumbum import local
 from time import sleep
 from random import sample
-from monkeylib import resolve_func, add_to_container_meta, container_names
+from monkeylib import resolve_func, add_to_container_meta, container_names, static_metas, init_static_meta
 
 import numpy
 import yaml
@@ -37,9 +37,7 @@ if '-m' in sys.argv:
 else:
   meta_file_path = './meta.yaml'
 
-meta_file = file(meta_file_path, 'r')
-metas = yaml.load(meta_file)
-check_meta(metas)
+init_static_meta(meta_file_path)
 
 func_trail = resolve_func(config['failure'])
 func_rescue = resolve_func(config['recovery'])

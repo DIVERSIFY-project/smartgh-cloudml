@@ -1,0 +1,1759 @@
+---
+cycle: 0
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 1
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 2
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 3
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 4
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 5
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [clever_sammet]
+---
+cycle: 6
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 7
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 8
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 9
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 10
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 11
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: []
+tostop: [high_albattani]
+---
+cycle: 12
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: []
+tostop: [ecstatic_goldstine, cranky_lumiere]
+---
+cycle: 13
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: [clever_sammet]
+tostop: []
+---
+cycle: 14
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 15
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 16
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 17
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, romantic_fermat,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, cranky_lumiere, high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 18
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, romantic_fermat,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, cranky_lumiere, high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 19
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, romantic_fermat,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, cranky_lumiere, high_albattani]
+tostart: [high_albattani]
+tostop: [stoic_thompson]
+---
+cycle: 20
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, cranky_lumiere]
+tostart: [ecstatic_goldstine, cranky_lumiere]
+tostop: []
+---
+cycle: 21
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 22
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 23
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [ecstatic_goldstine]
+---
+cycle: 24
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: []
+tostop: [angry_fermat, ecstatic_goldstine]
+---
+cycle: 25
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: []
+tostop: [clever_sammet]
+---
+cycle: 26
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: []
+tostop: [hungry_mcclintock]
+---
+cycle: 27
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: [stoic_thompson]
+tostop: []
+---
+cycle: 28
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: [cranky_lumiere]
+---
+cycle: 29
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 30
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, sick_mclean]
+stopped: [ecstatic_goldstine, angry_fermat, clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 31
+running: [stoic_thompson, grave_heisenberg, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, sick_mclean]
+stopped: [ecstatic_goldstine, hungry_mcclintock, angry_fermat, clever_sammet]
+tostart: [ecstatic_goldstine]
+tostop: []
+---
+cycle: 32
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, sick_mclean]
+stopped: [hungry_mcclintock, angry_fermat, clever_sammet]
+tostart: [angry_fermat]
+tostop: [grave_heisenberg]
+---
+cycle: 33
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [hungry_mcclintock, cranky_lumiere, clever_sammet]
+tostart: [clever_sammet]
+tostop: []
+---
+cycle: 34
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, cranky_lumiere]
+tostart: [hungry_mcclintock]
+tostop: [nostalgic_carson]
+---
+cycle: 35
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: []
+tostop: []
+---
+cycle: 36
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: [cranky_lumiere]
+tostop: [grave_heisenberg]
+---
+cycle: 37
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: [stoic_thompson]
+---
+cycle: 38
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: [cranky_lumiere]
+---
+cycle: 39
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 40
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, nostalgic_carson]
+tostart: [grave_heisenberg]
+tostop: [cranky_lumiere]
+---
+cycle: 41
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 42
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, nostalgic_carson]
+tostart: [nostalgic_carson]
+tostop: []
+---
+cycle: 43
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, cranky_lumiere]
+tostart: []
+tostop: [romantic_fermat, grave_heisenberg]
+---
+cycle: 44
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, cranky_lumiere]
+tostart: []
+tostop: []
+---
+cycle: 45
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, cranky_lumiere]
+tostart: [stoic_thompson]
+tostop: []
+---
+cycle: 46
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: [cranky_lumiere]
+tostop: []
+---
+cycle: 47
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [romantic_fermat]
+---
+cycle: 48
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: []
+---
+cycle: 49
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, romantic_fermat]
+tostart: []
+tostop: [hungry_mcclintock]
+---
+cycle: 50
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, romantic_fermat]
+tostart: []
+tostop: [hungry_mcclintock]
+---
+cycle: 51
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, romantic_fermat]
+tostart: [romantic_fermat]
+tostop: []
+---
+cycle: 52
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: [grave_heisenberg]
+tostop: [stoic_thompson]
+---
+cycle: 53
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [ecstatic_goldstine]
+---
+cycle: 54
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: []
+---
+cycle: 55
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: [romantic_fermat]
+---
+cycle: 56
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: [stoic_thompson, grave_heisenberg, sick_mclean]
+---
+cycle: 57
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, hungry_mcclintock]
+tostart: [hungry_mcclintock]
+tostop: []
+---
+cycle: 58
+running: [grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, ecstatic_goldstine]
+tostart: []
+tostop: [clever_sammet, nostalgic_carson, high_albattani]
+---
+cycle: 59
+running: [grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, ecstatic_goldstine]
+tostart: []
+tostop: [sick_mclean]
+---
+cycle: 60
+running: [grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere, high_albattani,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, ecstatic_goldstine, romantic_fermat]
+tostart: [stoic_thompson]
+tostop: []
+---
+cycle: 61
+running: [stoic_thompson, hungry_mcclintock, nostalgic_carson, cranky_lumiere, high_albattani,
+  angry_fermat, clever_sammet]
+stopped: [ecstatic_goldstine, grave_heisenberg, romantic_fermat, sick_mclean]
+tostart: [ecstatic_goldstine]
+tostop: []
+---
+cycle: 62
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet]
+stopped: [grave_heisenberg, romantic_fermat, sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 63
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, cranky_lumiere, angry_fermat]
+stopped: [grave_heisenberg, nostalgic_carson, high_albattani, romantic_fermat, clever_sammet,
+  sick_mclean]
+tostart: [romantic_fermat]
+tostop: []
+---
+cycle: 64
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, cranky_lumiere, romantic_fermat,
+  angry_fermat]
+stopped: [grave_heisenberg, nostalgic_carson, high_albattani, clever_sammet, sick_mclean]
+tostart: [sick_mclean, grave_heisenberg]
+tostop: []
+---
+cycle: 65
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [nostalgic_carson, high_albattani, clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 66
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [nostalgic_carson, high_albattani, clever_sammet]
+tostart: [nostalgic_carson, clever_sammet, high_albattani]
+tostop: []
+---
+cycle: 67
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 68
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 69
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [grave_heisenberg]
+---
+cycle: 70
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 71
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [grave_heisenberg, angry_fermat]
+---
+cycle: 72
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [hungry_mcclintock, stoic_thompson]
+---
+cycle: 73
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [sick_mclean]
+---
+cycle: 74
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: []
+---
+cycle: 75
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: [cranky_lumiere]
+---
+cycle: 76
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, angry_fermat]
+tostart: []
+tostop: [clever_sammet]
+---
+cycle: 77
+running: [ecstatic_goldstine, nostalgic_carson, cranky_lumiere, high_albattani, romantic_fermat,
+  clever_sammet, sick_mclean]
+stopped: [stoic_thompson, grave_heisenberg, hungry_mcclintock, angry_fermat]
+tostart: [grave_heisenberg]
+tostop: [sick_mclean]
+---
+cycle: 78
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, clever_sammet]
+stopped: [stoic_thompson, hungry_mcclintock, angry_fermat, sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 79
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, clever_sammet]
+stopped: [stoic_thompson, hungry_mcclintock, angry_fermat, sick_mclean]
+tostart: [angry_fermat]
+tostop: []
+---
+cycle: 80
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet]
+stopped: [stoic_thompson, hungry_mcclintock, cranky_lumiere, sick_mclean]
+tostart: [stoic_thompson, hungry_mcclintock]
+tostop: [nostalgic_carson]
+---
+cycle: 81
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat]
+stopped: [cranky_lumiere, clever_sammet, sick_mclean]
+tostart: [sick_mclean]
+tostop: []
+---
+cycle: 82
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [cranky_lumiere, clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 83
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [cranky_lumiere, clever_sammet]
+tostart: [cranky_lumiere]
+tostop: [romantic_fermat]
+---
+cycle: 84
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: [clever_sammet]
+tostop: []
+---
+cycle: 85
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 86
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 87
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: [hungry_mcclintock]
+---
+cycle: 88
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson, romantic_fermat]
+tostart: [nostalgic_carson]
+tostop: [high_albattani]
+---
+cycle: 89
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: [grave_heisenberg, sick_mclean]
+---
+cycle: 90
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: []
+---
+cycle: 91
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: [romantic_fermat]
+tostop: []
+---
+cycle: 92
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: [romantic_fermat]
+---
+cycle: 93
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 94
+running: [ecstatic_goldstine, stoic_thompson, nostalgic_carson, cranky_lumiere, romantic_fermat,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, hungry_mcclintock, high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 95
+running: [ecstatic_goldstine, stoic_thompson, nostalgic_carson, cranky_lumiere, romantic_fermat,
+  angry_fermat, clever_sammet]
+stopped: [grave_heisenberg, hungry_mcclintock, high_albattani, sick_mclean]
+tostart: [hungry_mcclintock]
+tostop: []
+---
+cycle: 96
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet]
+stopped: [grave_heisenberg, high_albattani, sick_mclean]
+tostart: [high_albattani]
+tostop: []
+---
+cycle: 97
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet]
+stopped: [grave_heisenberg, romantic_fermat, sick_mclean]
+tostart: [grave_heisenberg]
+tostop: []
+---
+cycle: 98
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, high_albattani, angry_fermat, clever_sammet]
+stopped: [romantic_fermat, sick_mclean]
+tostart: [sick_mclean]
+tostop: []
+---
+cycle: 99
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: [nostalgic_carson]
+---
+cycle: 100
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: [romantic_fermat]
+tostop: [high_albattani]
+---
+cycle: 101
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [sick_mclean]
+---
+cycle: 102
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 103
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 104
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 105
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson, high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 106
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [nostalgic_carson, high_albattani, sick_mclean]
+tostart: []
+tostop: [stoic_thompson, angry_fermat]
+---
+cycle: 107
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [nostalgic_carson, high_albattani, sick_mclean]
+tostart: [nostalgic_carson]
+tostop: []
+---
+cycle: 108
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [high_albattani, sick_mclean]
+tostart: [high_albattani]
+tostop: [angry_fermat]
+---
+cycle: 109
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet]
+stopped: [sick_mclean]
+tostart: [sick_mclean]
+tostop: [cranky_lumiere]
+---
+cycle: 110
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 111
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, angry_fermat]
+tostart: []
+tostop: [clever_sammet]
+---
+cycle: 112
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 113
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 114
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, cranky_lumiere, angry_fermat]
+tostart: [stoic_thompson, angry_fermat]
+tostop: []
+---
+cycle: 115
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: []
+tostop: [stoic_thompson]
+---
+cycle: 116
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [cranky_lumiere, clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 117
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [cranky_lumiere, clever_sammet]
+tostart: [cranky_lumiere]
+tostop: [angry_fermat]
+---
+cycle: 118
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 119
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: [clever_sammet]
+tostop: [angry_fermat, high_albattani]
+---
+cycle: 120
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: []
+tostop: []
+---
+cycle: 121
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: []
+tostop: []
+---
+cycle: 122
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 123
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, angry_fermat]
+tostart: [stoic_thompson]
+tostop: [ecstatic_goldstine]
+---
+cycle: 124
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [high_albattani, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 125
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [high_albattani, angry_fermat]
+tostart: [angry_fermat]
+tostop: []
+---
+cycle: 126
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 127
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [high_albattani]
+tostart: [high_albattani]
+tostop: []
+---
+cycle: 128
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: [romantic_fermat, hungry_mcclintock, sick_mclean]
+---
+cycle: 129
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: []
+---
+cycle: 130
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: []
+---
+cycle: 131
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: [ecstatic_goldstine]
+tostop: [romantic_fermat]
+---
+cycle: 132
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 133
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet]
+stopped: [hungry_mcclintock, romantic_fermat, sick_mclean]
+tostart: []
+tostop: [nostalgic_carson]
+---
+cycle: 134
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet]
+stopped: [hungry_mcclintock, romantic_fermat, sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 135
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet]
+stopped: [hungry_mcclintock, romantic_fermat, sick_mclean]
+tostart: []
+tostop: [ecstatic_goldstine]
+---
+cycle: 136
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet]
+stopped: [hungry_mcclintock, romantic_fermat, sick_mclean]
+tostart: [sick_mclean, hungry_mcclintock, romantic_fermat]
+tostop: []
+---
+cycle: 137
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [nostalgic_carson, cranky_lumiere]
+---
+cycle: 138
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: [grave_heisenberg]
+---
+cycle: 139
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: [clever_sammet, ecstatic_goldstine]
+---
+cycle: 140
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 141
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, nostalgic_carson]
+tostart: [nostalgic_carson]
+tostop: []
+---
+cycle: 142
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, cranky_lumiere]
+tostart: []
+tostop: []
+---
+cycle: 143
+running: [stoic_thompson, hungry_mcclintock, nostalgic_carson, romantic_fermat, high_albattani,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, grave_heisenberg, cranky_lumiere]
+tostart: [ecstatic_goldstine]
+tostop: [hungry_mcclintock]
+---
+cycle: 144
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [grave_heisenberg, cranky_lumiere, clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 145
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [grave_heisenberg, cranky_lumiere, clever_sammet]
+tostart: [cranky_lumiere]
+tostop: []
+---
+cycle: 146
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [grave_heisenberg, clever_sammet]
+tostart: [grave_heisenberg]
+tostop: [cranky_lumiere]
+---
+cycle: 147
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: [clever_sammet]
+tostop: []
+---
+cycle: 148
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: [cranky_lumiere]
+---
+cycle: 149
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: []
+---
+cycle: 150
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock]
+tostart: []
+tostop: [sick_mclean]
+---
+cycle: 151
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, cranky_lumiere]
+tostart: [hungry_mcclintock]
+tostop: []
+---
+cycle: 152
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: []
+tostop: [hungry_mcclintock]
+---
+cycle: 153
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: []
+tostop: []
+---
+cycle: 154
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [cranky_lumiere]
+tostart: [cranky_lumiere]
+tostop: [nostalgic_carson]
+---
+cycle: 155
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet]
+stopped: [sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 156
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet]
+stopped: [sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 157
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [hungry_mcclintock, sick_mclean]
+tostart: []
+tostop: [grave_heisenberg]
+---
+cycle: 158
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [hungry_mcclintock, sick_mclean]
+tostart: [sick_mclean]
+tostop: []
+---
+cycle: 159
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 160
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, nostalgic_carson]
+tostart: [hungry_mcclintock]
+tostop: [ecstatic_goldstine]
+---
+cycle: 161
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 162
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, nostalgic_carson]
+tostart: [nostalgic_carson]
+tostop: [angry_fermat]
+---
+cycle: 163
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: []
+---
+cycle: 164
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: []
+---
+cycle: 165
+running: [stoic_thompson, hungry_mcclintock, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, grave_heisenberg]
+tostart: [grave_heisenberg]
+tostop: [angry_fermat]
+---
+cycle: 166
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: [stoic_thompson]
+---
+cycle: 167
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, angry_fermat]
+tostart: []
+tostop: [hungry_mcclintock]
+---
+cycle: 168
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, angry_fermat]
+tostart: [ecstatic_goldstine]
+tostop: [high_albattani]
+---
+cycle: 169
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, clever_sammet,
+  sick_mclean]
+stopped: [angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 170
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, clever_sammet,
+  sick_mclean]
+stopped: [angry_fermat]
+tostart: [angry_fermat]
+tostop: []
+---
+cycle: 171
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson]
+tostart: []
+tostop: [grave_heisenberg]
+---
+cycle: 172
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, hungry_mcclintock]
+tostart: []
+tostop: [grave_heisenberg, cranky_lumiere, romantic_fermat]
+---
+cycle: 173
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, cranky_lumiere,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, hungry_mcclintock, high_albattani]
+tostart: []
+tostop: [romantic_fermat, angry_fermat]
+---
+cycle: 174
+running: [ecstatic_goldstine, grave_heisenberg, nostalgic_carson, cranky_lumiere,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, hungry_mcclintock, high_albattani]
+tostart: [stoic_thompson]
+tostop: [clever_sammet]
+---
+cycle: 175
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, high_albattani]
+tostart: [hungry_mcclintock]
+tostop: []
+---
+cycle: 176
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, high_albattani]
+tostart: [high_albattani]
+tostop: []
+---
+cycle: 177
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, cranky_lumiere, romantic_fermat]
+tostart: []
+tostop: []
+---
+cycle: 178
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  high_albattani, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, cranky_lumiere, romantic_fermat, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 179
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  high_albattani, sick_mclean]
+stopped: [grave_heisenberg, cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet]
+tostart: [grave_heisenberg]
+tostop: []
+---
+cycle: 180
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, high_albattani, sick_mclean]
+stopped: [cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet]
+tostart: [cranky_lumiere, romantic_fermat]
+tostop: [hungry_mcclintock, ecstatic_goldstine]
+---
+cycle: 181
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, high_albattani, romantic_fermat, sick_mclean]
+stopped: [angry_fermat, clever_sammet]
+tostart: [angry_fermat]
+tostop: []
+---
+cycle: 182
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: [clever_sammet]
+tostop: []
+---
+cycle: 183
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [grave_heisenberg]
+---
+cycle: 184
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 185
+running: [stoic_thompson, grave_heisenberg, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, hungry_mcclintock]
+tostart: []
+tostop: []
+---
+cycle: 186
+running: [stoic_thompson, grave_heisenberg, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, hungry_mcclintock]
+tostart: []
+tostop: [romantic_fermat]
+---
+cycle: 187
+running: [stoic_thompson, grave_heisenberg, nostalgic_carson, cranky_lumiere, high_albattani,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, hungry_mcclintock]
+tostart: []
+tostop: []
+---
+cycle: 188
+running: [stoic_thompson, nostalgic_carson, cranky_lumiere, romantic_fermat, high_albattani,
+  angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock]
+tostart: [hungry_mcclintock, ecstatic_goldstine]
+tostop: []
+---
+cycle: 189
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: []
+---
+cycle: 190
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: [ecstatic_goldstine]
+---
+cycle: 191
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, romantic_fermat]
+tostart: [grave_heisenberg]
+tostop: [high_albattani]
+---
+cycle: 192
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: [ecstatic_goldstine]
+---
+cycle: 193
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: []
+---
+cycle: 194
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: [romantic_fermat]
+tostop: [nostalgic_carson]
+---
+cycle: 195
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: []
+---
+cycle: 196
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 197
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, high_albattani]
+tostart: []
+tostop: [sick_mclean]
+---
+cycle: 198
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, high_albattani]
+tostart: [ecstatic_goldstine]
+tostop: [angry_fermat, stoic_thompson]
+---
+cycle: 199
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson, high_albattani]
+tostart: [high_albattani]
+tostop: []
+---
+cycle: 200
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: [high_albattani]
+---
+cycle: 201
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: []
+tostop: []
+---
+cycle: 202
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [nostalgic_carson, sick_mclean]
+tostart: [nostalgic_carson]
+tostop: []
+---
+cycle: 203
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet]
+stopped: [stoic_thompson, angry_fermat, sick_mclean]
+tostart: []
+tostop: [grave_heisenberg]
+---
+cycle: 204
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, high_albattani, romantic_fermat, clever_sammet]
+stopped: [stoic_thompson, angry_fermat, sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 205
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, romantic_fermat, clever_sammet]
+stopped: [stoic_thompson, high_albattani, angry_fermat, sick_mclean]
+tostart: [sick_mclean]
+tostop: [clever_sammet]
+---
+cycle: 206
+running: [ecstatic_goldstine, grave_heisenberg, hungry_mcclintock, cranky_lumiere,
+  nostalgic_carson, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [stoic_thompson, high_albattani, angry_fermat]
+tostart: [stoic_thompson, angry_fermat]
+tostop: []
+---
+cycle: 207
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [high_albattani]
+tostart: []
+tostop: []
+---
+cycle: 208
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, high_albattani]
+tostart: [high_albattani]
+tostop: [hungry_mcclintock]
+---
+cycle: 209
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: []
+---
+cycle: 210
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: [angry_fermat]
+---
+cycle: 211
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [grave_heisenberg, clever_sammet]
+tostart: [grave_heisenberg]
+tostop: [romantic_fermat]
+---
+cycle: 212
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  sick_mclean]
+stopped: [clever_sammet]
+tostart: []
+tostop: [high_albattani]
+---
+cycle: 213
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [hungry_mcclintock, clever_sammet]
+tostart: []
+tostop: []
+---
+cycle: 214
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, angry_fermat, sick_mclean]
+stopped: [hungry_mcclintock, clever_sammet]
+tostart: [clever_sammet]
+tostop: [sick_mclean, cranky_lumiere]
+---
+cycle: 215
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, angry_fermat]
+tostart: []
+tostop: [nostalgic_carson, sick_mclean]
+---
+cycle: 216
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, cranky_lumiere, nostalgic_carson,
+  high_albattani, clever_sammet, sick_mclean]
+stopped: [hungry_mcclintock, romantic_fermat, angry_fermat]
+tostart: [hungry_mcclintock]
+tostop: [cranky_lumiere]
+---
+cycle: 217
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, clever_sammet, sick_mclean]
+stopped: [high_albattani, romantic_fermat, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 218
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, clever_sammet, sick_mclean]
+stopped: [high_albattani, romantic_fermat, angry_fermat]
+tostart: [angry_fermat]
+tostop: [cranky_lumiere]
+---
+cycle: 219
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, angry_fermat, clever_sammet]
+stopped: [cranky_lumiere, high_albattani, romantic_fermat, sick_mclean]
+tostart: [romantic_fermat]
+tostop: []
+---
+cycle: 220
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  romantic_fermat, angry_fermat, clever_sammet]
+stopped: [cranky_lumiere, nostalgic_carson, high_albattani, sick_mclean]
+tostart: [high_albattani]
+tostop: [angry_fermat]
+---
+cycle: 221
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [cranky_lumiere, nostalgic_carson, sick_mclean]
+tostart: []
+tostop: []
+---
+cycle: 222
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet]
+stopped: [cranky_lumiere, nostalgic_carson, sick_mclean]
+tostart: [cranky_lumiere, sick_mclean]
+tostop: [grave_heisenberg]
+---
+cycle: 223
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [nostalgic_carson]
+tostart: [nostalgic_carson]
+tostop: []
+---
+cycle: 224
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 225
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, clever_sammet,
+  sick_mclean]
+stopped: [angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 226
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, clever_sammet,
+  sick_mclean]
+stopped: [angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 227
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, angry_fermat]
+tostart: []
+tostop: []
+---
+cycle: 228
+running: [stoic_thompson, ecstatic_goldstine, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, romantic_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg, angry_fermat]
+tostart: [angry_fermat]
+tostop: []
+---
+cycle: 229
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: []
+tostop: [ecstatic_goldstine]
+---
+cycle: 230
+running: [ecstatic_goldstine, stoic_thompson, hungry_mcclintock, nostalgic_carson,
+  cranky_lumiere, high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [grave_heisenberg]
+tostart: [grave_heisenberg]
+tostop: []
+---
+cycle: 231
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 232
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: [romantic_fermat]
+---
+cycle: 233
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, romantic_fermat, angry_fermat,
+  clever_sammet, sick_mclean]
+stopped: []
+tostart: []
+tostop: []
+---
+cycle: 234
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: [high_albattani]
+---
+cycle: 235
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: []
+---
+cycle: 236
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, nostalgic_carson, cranky_lumiere,
+  high_albattani, romantic_fermat, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine]
+tostart: []
+tostop: []
+---
+cycle: 237
+running: [stoic_thompson, grave_heisenberg, hungry_mcclintock, cranky_lumiere, nostalgic_carson,
+  high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [ecstatic_goldstine, romantic_fermat]
+tostart: [ecstatic_goldstine]
+tostop: []
+---
+cycle: 238
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, high_albattani, angry_fermat, clever_sammet, sick_mclean]
+stopped: [romantic_fermat]
+tostart: []
+tostop: [grave_heisenberg, stoic_thompson]
+---
+cycle: 239
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, angry_fermat, clever_sammet, sick_mclean]
+stopped: [high_albattani, romantic_fermat]
+tostart: []
+tostop: [sick_mclean, grave_heisenberg]
+---
+cycle: 240
+running: [ecstatic_goldstine, stoic_thompson, grave_heisenberg, hungry_mcclintock,
+  nostalgic_carson, cranky_lumiere, angry_fermat, clever_sammet, sick_mclean]
+stopped: [high_albattani, romantic_fermat]
+tostart: [romantic_fermat]
+tostop: []
+---
+cycle: 241
+running: [stoic_thompson, ecstatic_goldstine, grave_heisenberg, hungry_mcclintock,
+  cranky_lumiere, nostalgic_carson, romantic_fermat, angry_fermat, clever_sammet,
+  sick_mclean]
+stopped: [high_albattani]
+tostart: []
+tostop: [hungry_mcclintock, stoic_thompson]

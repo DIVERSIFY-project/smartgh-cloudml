@@ -1,0 +1,12 @@
+---
+cycle: 0
+running: [p9, p8, p6, p4, p3, p2, p1]
+stopped: [p7, p5, p0]
+tostart: [p0]
+tostop: []
+---
+cycle: 1
+running: [p8, p9, p6, p3, p4, p2, p1, p0]
+stopped: [p7, p5]
+tostart: []
+tostop: []
