@@ -1,7 +1,7 @@
 import numpy
 import random
 from collections import deque
-from monkeylib import resolve_func
+from monkeylib import *
 
 def random_select(samples, number):
   if len(samples) == 0:
@@ -55,6 +55,15 @@ def by_queue(samples, reload_time):
     return []
   
   
+def by_meta_size(samples, feature, base_rate):
+  result = []
+  for c in samples:
+    name = container_name(c)
+    size = len(get_static_metas()[name][feature])
+    print "name: %s, size: %d" % (name, size)
+    if random.random() > (base_rate ** size):
+      result.append(c)
+  return result
 
 def simple_poisson(samples, single_rate):
   return random_select(samples, {'module':'numpy.random', 'function':'poisson', 'lam':single_rate*len(samples)})

@@ -3,7 +3,7 @@
 from plumbum import local
 from time import sleep
 from random import sample
-from monkeylib import resolve_func, add_to_container_meta, container_names, static_metas, init_static_meta
+from monkeylib import *
 
 import numpy
 import yaml
@@ -15,15 +15,15 @@ from monkeylog import Logger
 
 docker = local["docker"]
 
-metas = None  #A dictionary with containers' meta-information
-
 dead_time = dict()
 alive_time = dict()
 
 try:
   config_file_path = sys.argv[-1]
+  if config_file_path.endswith('py'):
+    raise Exception('need a yaml file')
 except:
-  config_file_path = 'conf.yaml'
+  config_file_path = './conf.yaml'
 
 conf_file = file(config_file_path, 'r')
 config = yaml.load(conf_file)
@@ -62,6 +62,10 @@ while True :
    add_to_container_meta(c) 
    if not c in alives:
       deads.append(c)
+
+  #print get_static_metas()
+  alives = [x for x in alives if container_name(x) in get_static_metas()]
+  deads = [x for x in deads if container_name(x) in get_static_metas()]
 
   print 'Running: %s' % container_names(alives)
   print 'Stopped: %s' % container_names(deads)

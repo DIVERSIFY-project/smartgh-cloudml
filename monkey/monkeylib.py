@@ -1,9 +1,14 @@
 import inspect
 from plumbum import local
+import yaml
 
 docker_ps_a = local["docker"]["ps"]["-a"]
 grep = local["grep"]
 static_metas = None
+
+def get_static_metas():
+  global static_metas
+  return static_metas
 
 class ContainerMeta:
   def __init__(self, line):
@@ -24,15 +29,16 @@ def add_to_container_meta(id):
 
 def check_meta(metadict):
   for k in metadict:
-    v = metadict[v]
+    v = metadict[k]
     for mkeyword in ['services', 'clients']:
       try:
         if not(type(v[mkeyword]) is list):
           raise Exception('Not a list')
-      except Error as e:
+      except Exception as e:
         raise Exception(e, 'Container meta file format error at %s/%s' % (k, mkeyword))
 
-def init_static_meta(meta_file_path)
+def init_static_meta(meta_file_path):
+  global static_metas
   meta_file = file(meta_file_path, 'r')
   static_metas = yaml.load(meta_file)
   check_meta(static_metas)

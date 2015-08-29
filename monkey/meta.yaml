@@ -5,7 +5,7 @@ p2:
   clients: [c1]
   services: [s2, s4]
 p3:
-  client: []
+  clients: []
   services: [s5]
 p4: 
   clients: []

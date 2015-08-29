@@ -1,5 +1,11 @@
 interval : 5
-failure : 
+failure :
+  module : basic_algos
+  function : by_meta_size
+  reserve_first_arg : True
+  feature : clients
+  base_rate : 0.9
+failure-no-use: 
   module: basic_algos
   function : by_age
   reserve_first_arg : True

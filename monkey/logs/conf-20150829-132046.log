@@ -1,0 +1,6 @@
+---
+cycle: 0
+running: [p5, p2, p1]
+stopped: [p4, p3]
+tostart: [p3]
+tostop: []
