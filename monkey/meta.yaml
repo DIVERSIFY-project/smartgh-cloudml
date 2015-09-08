@@ -1,0 +1,15 @@
+p1: 
+  clients: [c1, c2, c3]
+  services: [s1, s2]
+p2:
+  clients: [c1]
+  services: [s2, s4]
+p3:
+  client: []
+  services: [s5]
+p4: 
+  clients: []
+  services: [s1, s2]
+p5:
+  clients: [c2, c4]
+  services: [s4]

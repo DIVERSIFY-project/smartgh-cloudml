@@ -21,6 +21,17 @@ def add_to_container_meta(id):
   container = ContainerMeta(line)
   container_meta[id] = container
 
+def check_meta(metadict):
+  for k in metadict:
+    v = metadict[v]
+    for mkeyword in ['services', 'clients']:
+      try:
+        if not(type(v[mkeyword]) is list):
+          raise Exception('Not a list')
+      except Error as e:
+        raise Exception(e, 'Container meta file format error at %s/%s' % (k, mkeyword))
+      
+
 def container_name(id):
   return container_meta[id].name
 

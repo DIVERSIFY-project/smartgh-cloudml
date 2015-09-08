@@ -15,6 +15,8 @@ from monkeylog import Logger
 
 docker = local["docker"]
 
+metas = None  #A dictionary with containers' meta-information
+
 dead_time = dict()
 alive_time = dict()
 
@@ -29,6 +31,15 @@ interval = int(config['interval'])
 
 if '-i' in sys.argv:
   interval = int(sys.argv[sys.argv.index('-i')+1])
+
+if '-m' in sys.argv:
+  meta_file_path = sys.argv[sys.argv.index('-m')+1]
+else:
+  meta_file_path = './meta.yaml'
+
+meta_file = file(meta_file_path, 'r')
+metas = yaml.load(meta_file)
+check_meta(metas)
 
 func_trail = resolve_func(config['failure'])
 func_rescue = resolve_func(config['recovery'])
