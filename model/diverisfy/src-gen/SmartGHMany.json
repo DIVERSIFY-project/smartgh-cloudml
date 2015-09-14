@@ -413,43 +413,43 @@
 ,
 "relationshipInstances": [
 { "eClass":"net.cloudml.core:RelationshipInstance" ,
- "name":"NoName22567",
+ "name":"NoName63637",
+ "type":"relationships[BasicHopper2LocalRedis]",
+ "requiredPortInstance":"internalComponentInstances[hopper02]/requiredPortInstances[redisReq_hopper02]",
+ "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
+,
+{ "eClass":"net.cloudml.core:RelationshipInstance" ,
+ "name":"NoName12833",
  "type":"relationships[BasicHopper2LocalRedis]",
  "requiredPortInstance":"internalComponentInstances[hopper00]/requiredPortInstances[redisReq_hopper00]",
  "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
 ,
 { "eClass":"net.cloudml.core:RelationshipInstance" ,
- "name":"NoName 6605",
+ "name":"NoName52011",
  "type":"relationships[BasicHopper2LocalRedis]",
  "requiredPortInstance":"internalComponentInstances[hopper01]/requiredPortInstances[redisReq_hopper01]",
- "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
-,
-{ "eClass":"net.cloudml.core:RelationshipInstance" ,
- "name":"NoName61571",
- "type":"relationships[BasicHopper2LocalRedis]",
- "requiredPortInstance":"internalComponentInstances[hopper02]/requiredPortInstances[redisReq_hopper02]",
  "providedPortInstance":"internalComponentInstances[localRedis00]/providedPortInstances[redisPrv_localRedis00]"}
 ]
 ,
 "executesInstances": [
 { "eClass":"net.cloudml.core:ExecuteInstance" ,
- "name":"NoName41178",
- "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
- "requiredExecutionPlatformInstance":"internalComponentInstances[localRedis00]/requiredExecutionPlatformInstance[ubuntuReq_localRedis00]"}
-,
-{ "eClass":"net.cloudml.core:ExecuteInstance" ,
- "name":"NoName14953",
- "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
- "requiredExecutionPlatformInstance":"internalComponentInstances[hopper00]/requiredExecutionPlatformInstance[ubuntuReq_hopper00]"}
-,
-{ "eClass":"net.cloudml.core:ExecuteInstance" ,
- "name":"NoName 6315",
+ "name":"NoName 7064",
  "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
  "requiredExecutionPlatformInstance":"internalComponentInstances[hopper01]/requiredExecutionPlatformInstance[ubuntuReq_hopper01]"}
 ,
 { "eClass":"net.cloudml.core:ExecuteInstance" ,
- "name":"NoName 7279",
+ "name":"NoName12780",
  "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
  "requiredExecutionPlatformInstance":"internalComponentInstances[hopper02]/requiredExecutionPlatformInstance[ubuntuReq_hopper02]"}
+,
+{ "eClass":"net.cloudml.core:ExecuteInstance" ,
+ "name":"NoName30728",
+ "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
+ "requiredExecutionPlatformInstance":"internalComponentInstances[hopper00]/requiredExecutionPlatformInstance[ubuntuReq_hopper00]"}
+,
+{ "eClass":"net.cloudml.core:ExecuteInstance" ,
+ "name":"NoName36610",
+ "providedExecutionPlatformInstance":"vmInstances[vm01]/providedExecutionPlatformInstances[ubuntuPrv_vm01]",
+ "requiredExecutionPlatformInstance":"internalComponentInstances[localRedis00]/requiredExecutionPlatformInstance[ubuntuReq_localRedis00]"}
 ]
 }

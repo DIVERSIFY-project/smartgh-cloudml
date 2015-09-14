@@ -186,7 +186,7 @@
 ,
 "relationshipInstances": [
 { "eClass":"net.cloudml.core:RelationshipInstance" ,
- "name":"NoName27020",
+ "name":"NoName46513",
  "type":"relationships[WebToPyLB]",
  "requiredPortInstance":"internalComponentInstances[web00]/requiredPortInstances[pylbReq_web00]",
  "providedPortInstance":"externalComponentInstances[pylb]/providedPortInstances[pylbPrv_pylb]"}
@@ -194,7 +194,7 @@
 ,
 "executesInstances": [
 { "eClass":"net.cloudml.core:ExecuteInstance" ,
- "name":"NoName17930",
+ "name":"NoName57677",
  "providedExecutionPlatformInstance":"vmInstances[vm00]/providedExecutionPlatformInstances[ubuntuPrv_vm00]",
  "requiredExecutionPlatformInstance":"internalComponentInstances[web00]/requiredExecutionPlatformInstance[ubuntuReq_web00]"}
 ]

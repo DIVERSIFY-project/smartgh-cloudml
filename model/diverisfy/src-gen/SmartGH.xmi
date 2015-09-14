@@ -69,7 +69,7 @@
     <requiredPortInstances name="lbReq_lb" type="//@internalComponents.4/@requiredPorts.0" componentInstance="//@internalComponentInstances.5"/>
     <requiredExecutionPlatformInstance name="ubuntuReq_lb" owner="//@internalComponentInstances.5" type="//@internalComponents.4/@requiredExecutionPlatform"/>
   </internalComponentInstances>
-  <vms name="OpenstackMedium" provider="//@providers.0" Region="RegionOne" minRam="4096" minCores="1" minStorage="10" os="ubuntu" imageId="RegionOne/91cbd08b-cd06-4c5e-a98d-1105be24f342" securityGroup="default" sshKey="mcuser" privateKey="/Users/fafey/divexp/cloudml-test/mcuser.pem" groupName="diversify">
+  <vms name="OpenstackMedium" provider="//@providers.0" endPoint="http://" Region="RegionOne" minRam="4096" minCores="1" minStorage="10" os="ubuntu" imageId="RegionOne/91cbd08b-cd06-4c5e-a98d-1105be24f342" securityGroup="default" sshKey="mcuser" privateKey="/Users/fafey/divexp/cloudml-test/mcuser.pem" groupName="diversify">
     <providedExecutionPlatforms name="ubuntuPrv" owner="//@vms.0">
       <offers name="OS" value="Ubuntu/docker"/>
     </providedExecutionPlatforms>
@@ -89,16 +89,16 @@
   <relationships name="Web2LB" requiredPort="//@internalComponents.4/@requiredPorts.0" providedPort="//@internalComponents.2/@providedPorts.0">
     <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'printf &quot;$2:@instance{providedEnd/owner/value/properties/port};&quot;>>@instance{requiredEnd/owner/value/name}.lb'>config_lb.sh; sudo bash config_lb.sh"/>
   </relationships>
-  <relationshipInstances name="NoName71297" type="//@relationships.1" requiredPortInstance="//@internalComponentInstances.3/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName60653" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.4/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName52359" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName 8215" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.2/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName46734" type="//@relationships.3" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.1/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName39032" type="//@relationships.3" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
-  <executesInstances name="NoName23382" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.4/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName 1228" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.3/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName26497" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName43435" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName47339" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName80564" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.5/@requiredExecutionPlatformInstance"/>
+  <relationshipInstances name="NoName43380" type="//@relationships.1" requiredPortInstance="//@internalComponentInstances.3/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName85827" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.4/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName  815" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName98144" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.2/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName85991" type="//@relationships.3" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.1/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName99423" type="//@relationships.3" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
+  <executesInstances name="NoName93516" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.4/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName64093" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.3/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName85699" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName50980" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName63506" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName48173" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.5/@requiredExecutionPlatformInstance"/>
 </net.cloudml.core:CloudMLModel>

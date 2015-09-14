@@ -38,6 +38,6 @@
     <providedExecutionPlatformInstances name="ubuntuPrv_vm00" owner="//@vmInstances.0" type="//@vms.0/@providedExecutionPlatforms.0"/>
   </vmInstances>
   <relationships name="WebToPyLB" requiredPort="//@internalComponents.0/@requiredPorts.0" providedPort="//@externalComponents.0/@providedPorts.0"/>
-  <relationshipInstances name="NoName27020" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@externalComponentInstances.0/@providedPortInstances.0"/>
-  <executesInstances name="NoName17930" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
+  <relationshipInstances name="NoName46513" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@externalComponentInstances.0/@providedPortInstances.0"/>
+  <executesInstances name="NoName57677" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
 </net.cloudml.core:CloudMLModel>

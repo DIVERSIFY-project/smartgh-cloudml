@@ -71,29 +71,29 @@
       <demands name="OS" value="Ubuntu/docker"/>
     </requiredExecutionPlatform>
   </internalComponents>
-  <internalComponentInstances name="hopper00" type="//@internalComponents.4">
-    <properties name="hport" value="8093"/>
-    <providedPortInstances name="hopperPrv_hopper00" type="//@internalComponents.4/@providedPorts.0" componentInstance="//@internalComponentInstances.0"/>
-    <requiredPortInstances name="redisReq_hopper00" type="//@internalComponents.4/@requiredPorts.0" componentInstance="//@internalComponentInstances.0"/>
-    <requiredExecutionPlatformInstance name="ubuntuReq_hopper00" owner="//@internalComponentInstances.0" type="//@internalComponents.4/@requiredExecutionPlatform"/>
+  <internalComponentInstances name="hopper00" type="//@internalComponents.3">
+    <properties name="hport" value="8094"/>
+    <providedPortInstances name="hopperPrv_hopper00" type="//@internalComponents.3/@providedPorts.0" componentInstance="//@internalComponentInstances.0"/>
+    <requiredPortInstances name="redisReq_hopper00" type="//@internalComponents.3/@requiredPorts.0" componentInstance="//@internalComponentInstances.0"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_hopper00" owner="//@internalComponentInstances.0" type="//@internalComponents.3/@requiredExecutionPlatform"/>
   </internalComponentInstances>
-  <internalComponentInstances name="web01" type="//@internalComponents.6">
+  <internalComponentInstances name="web04" type="//@internalComponents.6">
     <properties name="port" value="8083"/>
-    <properties name="tag" value="default"/>
-    <providedPortInstances name="webPrv_web01" type="//@internalComponents.6/@providedPorts.0" componentInstance="//@internalComponentInstances.1"/>
-    <requiredPortInstances name="hopperReq_web01" type="//@internalComponents.6/@requiredPorts.0" componentInstance="//@internalComponentInstances.1"/>
-    <requiredExecutionPlatformInstance name="ubuntuReq_web01" owner="//@internalComponentInstances.1" type="//@internalComponents.6/@requiredExecutionPlatform"/>
+    <properties name="tag" value="foot"/>
+    <providedPortInstances name="webPrv_web04" type="//@internalComponents.6/@providedPorts.0" componentInstance="//@internalComponentInstances.1"/>
+    <requiredPortInstances name="hopperReq_web04" type="//@internalComponents.6/@requiredPorts.0" componentInstance="//@internalComponentInstances.1"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_web04" owner="//@internalComponentInstances.1" type="//@internalComponents.6/@requiredExecutionPlatform"/>
   </internalComponentInstances>
   <internalComponentInstances name="web00" type="//@internalComponents.6">
     <properties name="port" value="8081"/>
-    <properties name="tag" value="car"/>
+    <properties name="tag" value="fast"/>
     <providedPortInstances name="webPrv_web00" type="//@internalComponents.6/@providedPorts.0" componentInstance="//@internalComponentInstances.2"/>
     <requiredPortInstances name="hopperReq_web00" type="//@internalComponents.6/@requiredPorts.0" componentInstance="//@internalComponentInstances.2"/>
     <requiredExecutionPlatformInstance name="ubuntuReq_web00" owner="//@internalComponentInstances.2" type="//@internalComponents.6/@requiredExecutionPlatform"/>
   </internalComponentInstances>
-  <internalComponentInstances name="sensor01" type="//@internalComponents.1">
-    <requiredPortInstances name="redisReq_sensor01" type="//@internalComponents.1/@requiredPorts.0" componentInstance="//@internalComponentInstances.3"/>
-    <requiredExecutionPlatformInstance name="ubuntuReq_sensor01" owner="//@internalComponentInstances.3" type="//@internalComponents.1/@requiredExecutionPlatform"/>
+  <internalComponentInstances name="sensor02" type="//@internalComponents.0">
+    <requiredPortInstances name="redisReq_sensor02" type="//@internalComponents.0/@requiredPorts.0" componentInstance="//@internalComponentInstances.3"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_sensor02" owner="//@internalComponentInstances.3" type="//@internalComponents.0/@requiredExecutionPlatform"/>
   </internalComponentInstances>
   <internalComponentInstances name="localRedis00" type="//@internalComponents.7">
     <providedPortInstances name="redisPrv_localRedis00" type="//@internalComponents.7/@providedPorts.0" componentInstance="//@internalComponentInstances.4"/>
@@ -103,11 +103,11 @@
     <requiredPortInstances name="lbReq_lb00" type="//@internalComponents.8/@requiredPorts.0" componentInstance="//@internalComponentInstances.5"/>
     <requiredExecutionPlatformInstance name="ubuntuReq_lb00" owner="//@internalComponentInstances.5" type="//@internalComponents.8/@requiredExecutionPlatform"/>
   </internalComponentInstances>
-  <internalComponentInstances name="hopper01" type="//@internalComponents.2">
-    <properties name="hport" value="8092"/>
-    <providedPortInstances name="hopperPrv_hopper01" type="//@internalComponents.2/@providedPorts.0" componentInstance="//@internalComponentInstances.6"/>
-    <requiredPortInstances name="redisReq_hopper01" type="//@internalComponents.2/@requiredPorts.0" componentInstance="//@internalComponentInstances.6"/>
-    <requiredExecutionPlatformInstance name="ubuntuReq_hopper01" owner="//@internalComponentInstances.6" type="//@internalComponents.2/@requiredExecutionPlatform"/>
+  <internalComponentInstances name="hopper01" type="//@internalComponents.4">
+    <properties name="hport" value="8093"/>
+    <providedPortInstances name="hopperPrv_hopper01" type="//@internalComponents.4/@providedPorts.0" componentInstance="//@internalComponentInstances.6"/>
+    <requiredPortInstances name="redisReq_hopper01" type="//@internalComponents.4/@requiredPorts.0" componentInstance="//@internalComponentInstances.6"/>
+    <requiredExecutionPlatformInstance name="ubuntuReq_hopper01" owner="//@internalComponentInstances.6" type="//@internalComponents.4/@requiredExecutionPlatform"/>
   </internalComponentInstances>
   <vms name="OpenStackLarge" provider="//@providers.0" endPoint="http://" Region="RegionOne" minRam="4096" minCores="1" minStorage="10" os="ubuntu" imageId="RegionOne/6bed1e68-e160-4037-b6f9-4a961e1397bb" securityGroup="default" sshKey="mcuser" privateKey="/opt/cloudml/mcuser.pem" groupName="diversify">
     <providedExecutionPlatforms name="ubuntuPrv" owner="//@vms.0">
@@ -121,6 +121,9 @@
   </vms>
   <vmInstances name="vm01" type="//@vms.0">
     <providedExecutionPlatformInstances name="ubuntuPrv_vm01" owner="//@vmInstances.0" type="//@vms.0/@providedExecutionPlatforms.0"/>
+  </vmInstances>
+  <vmInstances name="vm00" type="//@vms.0">
+    <providedExecutionPlatformInstances name="ubuntuPrv_vm00" owner="//@vmInstances.1" type="//@vms.0/@providedExecutionPlatforms.0"/>
   </vmInstances>
   <relationships name="BasicHopper2LocalRedis" requiredPort="//@internalComponents.2/@requiredPorts.0" providedPort="//@internalComponents.7/@providedPorts.0">
     <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'echo &quot;$2&quot;>@instance{requiredEnd/owner/value/name}.redisurl'>config_redisurl.sh; sudo bash config_redisurl.sh"/>
@@ -155,18 +158,18 @@
   <relationships name="Lb2Web" requiredPort="//@internalComponents.8/@requiredPorts.0" providedPort="//@internalComponents.6/@providedPorts.0">
     <requiredPortResource name="DockerRun" installCommand="cd ~ ; echo 'printf &quot;$2:@instance{providedEnd/owner/value/properties/port}#@instance{providedEnd/owner/value/properties/tag};&quot;>>@instance{requiredEnd/owner/value/name}.lb ; printf &quot;$1&quot;>myip'>config_lb.sh; sudo bash config_lb.sh"/>
   </relationships>
-  <relationshipInstances name="NoName 8307" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName46351" type="//@relationships.0" requiredPortInstance="//@internalComponentInstances.6/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName57899" type="//@relationships.5" requiredPortInstance="//@internalComponentInstances.3/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName36721" type="//@relationships.6" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.6/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName59835" type="//@relationships.8" requiredPortInstance="//@internalComponentInstances.2/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName 4478" type="//@relationships.10" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.1/@providedPortInstances.0"/>
-  <relationshipInstances name="NoName46377" type="//@relationships.10" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
-  <executesInstances name="NoName36722" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName92116" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName76378" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName53808" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.3/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName21014" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.4/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName59938" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.5/@requiredExecutionPlatformInstance"/>
-  <executesInstances name="NoName91858" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.6/@requiredExecutionPlatformInstance"/>
+  <relationshipInstances name="NoName13732" type="//@relationships.1" requiredPortInstance="//@internalComponentInstances.0/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName34336" type="//@relationships.2" requiredPortInstance="//@internalComponentInstances.6/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName28867" type="//@relationships.4" requiredPortInstance="//@internalComponentInstances.3/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.4/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName93819" type="//@relationships.7" requiredPortInstance="//@internalComponentInstances.1/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.0/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName65675" type="//@relationships.8" requiredPortInstance="//@internalComponentInstances.2/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.6/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName21249" type="//@relationships.10" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.1/@providedPortInstances.0"/>
+  <relationshipInstances name="NoName43302" type="//@relationships.10" requiredPortInstance="//@internalComponentInstances.5/@requiredPortInstances.0" providedPortInstance="//@internalComponentInstances.2/@providedPortInstances.0"/>
+  <executesInstances name="NoName61251" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.0/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName 4213" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.1/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName97248" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.2/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName93653" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.3/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName81957" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.4/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName30248" providedExecutionPlatformInstance="//@vmInstances.0/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.5/@requiredExecutionPlatformInstance"/>
+  <executesInstances name="NoName36248" providedExecutionPlatformInstance="//@vmInstances.1/@providedExecutionPlatformInstances.0" requiredExecutionPlatformInstance="//@internalComponentInstances.6/@requiredExecutionPlatformInstance"/>
 </net.cloudml.core:CloudMLModel>

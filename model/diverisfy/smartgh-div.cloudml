@@ -193,30 +193,31 @@ types{
 
 instances{ 
 	vm vm01 typed OpenStackLarge
+	vm vm00 typed OpenStackLarge
 	
-	internal component hopper00 typed FastCH { properties: ('hport' : '8093')}
-	internal component web01 typed Web { properties: ('port' : '8083') ('tag' : 'default')}
-	internal component web00 typed Web { properties: ('port' : '8081') ('tag' : 'car')}
-	internal component sensor01 typed PollutionSensor
+	internal component hopper00 typed FootHopper { properties: ('hport' : '8094')}
+	internal component web04 typed Web { properties: ('port' : '8083') ('tag' : 'foot')}
+	internal component web00 typed Web { properties: ('port' : '8081') ('tag' : 'fast')}
+	internal component sensor02 typed NoiseSensor
 	internal component localRedis00 typed LocalRedis
 	internal component lb00 typed Lb
-	internal component hopper01 typed BasicHopper { properties: ('hport' : '8092')}
+	internal component hopper01 typed FastCH { properties: ('hport' : '8093')}
 	
 	
-	connect hopper00.redisReq to localRedis00.redisPrv typed FastCH2LocalRedis
-	connect hopper01.redisReq to localRedis00.redisPrv typed BasicHopper2LocalRedis
-	connect sensor01.redisReq to localRedis00.redisPrv typed PollutionSensor2LocalRedis
-	connect web01.hopperReq to hopper01.hopperPrv typed Web2BasicHopper
-	connect web00.hopperReq to hopper00.hopperPrv typed Web2FastCH
-	connect lb00.lbReq to web01.webPrv typed Lb2Web
+	connect hopper00.redisReq to localRedis00.redisPrv typed FootHopper2LocalRedis
+	connect hopper01.redisReq to localRedis00.redisPrv typed FastCH2LocalRedis
+	connect sensor02.redisReq to localRedis00.redisPrv typed NoiseSensor2LocalRedis
+	connect web04.hopperReq to hopper00.hopperPrv typed Web2FootHopper
+	connect web00.hopperReq to hopper01.hopperPrv typed Web2FastCH
+	connect lb00.lbReq to web04.webPrv typed Lb2Web
 	connect lb00.lbReq to web00.webPrv typed Lb2Web
 	
 	host hopper00.ubuntuReq on vm01.ubuntuPrv
-	host web01.ubuntuReq on vm01.ubuntuPrv
-	host web00.ubuntuReq on vm01.ubuntuPrv
-	host sensor01.ubuntuReq on vm01.ubuntuPrv
-	host localRedis00.ubuntuReq on vm01.ubuntuPrv
+	host web04.ubuntuReq on vm01.ubuntuPrv
+	host web00.ubuntuReq on vm00.ubuntuPrv
+	host sensor02.ubuntuReq on vm01.ubuntuPrv
+	host localRedis00.ubuntuReq on vm00.ubuntuPrv
 	host lb00.ubuntuReq on vm01.ubuntuPrv
-	host hopper01.ubuntuReq on vm01.ubuntuPrv
+	host hopper01.ubuntuReq on vm00.ubuntuPrv
 	
 }
