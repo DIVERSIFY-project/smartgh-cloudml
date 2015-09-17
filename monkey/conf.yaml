@@ -1,4 +1,4 @@
-interval : 5
+interval : tick_websocket
 failure :
   module : basic_algos
   function : by_meta_size
