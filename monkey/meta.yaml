@@ -1,15 +1,20 @@
 p1: 
   clients: [c1, c2, c3]
   services: [s1, s2]
+  port: 8081
 p2:
   clients: [c1]
   services: [s2, s4]
+  port: 8082
 p3:
   clients: []
   services: [s5]
+  port: 8083
 p4: 
   clients: []
   services: [s1, s2]
+  port: 8084
 p5:
   clients: [c2, c4]
   services: [s4]
+  port: 8085

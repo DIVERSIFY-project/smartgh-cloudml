@@ -4,7 +4,8 @@ from plumbum import local
 from time import sleep
 from random import sample
 from monkeylib import *
-
+import monkeyws
+import os
 import numpy
 import yaml
 import inspect
@@ -27,10 +28,10 @@ except:
 
 conf_file = file(config_file_path, 'r')
 config = yaml.load(conf_file)
-interval = int(config['interval'])
+interval = config['interval']
 
 if '-i' in sys.argv:
-  interval = int(sys.argv[sys.argv.index('-i')+1])
+  interval = sys.argv[sys.argv.index('-i')+1]
 
 if '-m' in sys.argv:
   meta_file_path = sys.argv[sys.argv.index('-m')+1]
@@ -45,9 +46,36 @@ func_rescue = resolve_func(config['recovery'])
 timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('-%Y%m%d-%H%M%S')
 logger = Logger(config_file_path.split('/')[-1].split(".")[0]+timestamp)
 
+all_containers = docker["ps", "-a", "-q"]().split()
+metas = get_static_metas()
+
+for c in all_containers:
+ add_to_container_meta(c)
+
+all_containers_name = container_names(all_containers)
+print all_containers_name
+
+for c in metas:
+  if not(c in all_containers_name):
+    print docker("run", "-d", "-p", "%d:8080" % metas[c]["port"], "--name", c, "songhui/smhp-hopper-jetty")
+
 cycle = 0
 #Main loop
 while True :
+
+  if interval == "tick_websocket":
+    while True:
+      sleep(0.1)
+      if monkeyws.tick:
+        monkeyws.tick = False
+        break
+  elif interval == "tick_keyboard":
+    raw_input("press <Enter> to continue...")
+  elif type(interval) is int:
+    interval_i = int(interval)
+    sleep(interval_i)
+    
+
   print '\n========%d========' % cycle
   logger.new_cycle(cycle)
   cycle += 1
@@ -71,7 +99,13 @@ while True :
   print 'Stopped: %s' % container_names(deads)
   logger.log('running', container_names(alives))
   logger.log('stopped', container_names(deads))
+  
+  alive_services = set()
+  for c in alives:
+    for s in get_static_metas()[container_name(c)]['services']:
+      alive_services.add(s)
 
+  logger.log("alive_services", list(alive_services))
 
   for c in alives:
     dead_time.pop(c, None)
@@ -107,5 +141,4 @@ while True :
     docker["start"].popen(c)
   
   logger.flush()
-  sleep(interval)
 

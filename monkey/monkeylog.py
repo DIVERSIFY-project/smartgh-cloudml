@@ -21,4 +21,4 @@ class Logger:
     f.write("---\n")
     f.write(yaml.dump(self.current_item))
     f.close()
-    push(yaml.dump(self.current_item))
+    push("%s\n" % yaml.dump(self.current_item))
