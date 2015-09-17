@@ -1,11 +1,12 @@
 import yaml
+from monkeyws import start_server, push
 
 class Logger:
   def __init__(self, name):
     self.filepath = "logs/%s.log" % name
     f = open(self.filepath, 'w')
     f.close()
-
+    start_server()
     self.current_item = {}
 
   def new_cycle(self,cycle):
@@ -20,3 +21,4 @@ class Logger:
     f.write("---\n")
     f.write(yaml.dump(self.current_item))
     f.close()
+    push(yaml.dump(self.current_item))
