@@ -80,7 +80,7 @@ while True :
   logger.new_cycle(cycle)
   cycle += 1
 
-  alives = docker[ "ps", "-q" ]().split()
+  alives = docker[ "ps", "-q", "-f", "status=running" ]().split()
   all_containers = docker[ "ps", "-a" , "-q"]().split()
 
   deads = []
@@ -135,10 +135,10 @@ while True :
   logger.log("tostart", container_names(tostart))
 
   for c in tostop:
-    docker["stop"].popen(c)
+    docker["pause"].popen(c)
 
   for c in tostart:
-    docker["start"].popen(c)
+    docker["unpause"].popen(c)
   
   logger.flush()
 
