@@ -4,7 +4,8 @@ from plumbum import local
 from time import sleep
 from random import sample
 from monkeylib import *
-import monkeyws
+#import monkeyws
+import monkeyws_client
 import os
 import numpy
 import yaml
@@ -13,6 +14,8 @@ import sys
 import time
 import datetime
 from monkeylog import Logger
+
+useLogger = False
 
 docker = local["docker"]
 
@@ -39,7 +42,8 @@ func_trail = resolve_func(config['failure'])
 func_rescue = resolve_func(config['recovery'])
 
 timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('-%Y%m%d-%H%M%S')
-logger = Logger(config_file_path.split('/')[-1].split(".")[0]+timestamp)
+if useLogger:
+  logger = Logger(config_file_path.split('/')[-1].split(".")[0]+timestamp)
 
 all_containers = docker["ps", "-a", "-q"]().split()
 
@@ -57,8 +61,8 @@ while True :
   if interval == "tick_websocket":
     while True:
       sleep(0.1)
-      if monkeyws.tick:
-        monkeyws.tick = False
+      if monkeyws_client.tick:
+        monkeyws_client.tick = False
         break
   elif interval == "tick_keyboard":
     raw_input("press <Enter> to continue...")
@@ -68,7 +72,8 @@ while True :
     
 
   print '\n========%d========' % cycle
-  logger.new_cycle(cycle)
+  if useLogger:
+    logger.new_cycle(cycle)
   cycle += 1
 
   alives = docker[ "ps", "-q", "-f", "status=running" ]().split()
@@ -86,8 +91,9 @@ while True :
 
   print 'Running: %s' % container_names(alives)
   print 'Stopped: %s' % container_names(deads)
-  logger.log('running', container_names(alives))
-  logger.log('stopped', container_names(deads))
+  if useLogger:
+    logger.log('running', container_names(alives))
+    logger.log('stopped', container_names(deads))
   
 
   for c in alives:
@@ -114,8 +120,9 @@ while True :
   tostart = func_rescue(dead_time)
   print 'To stop: %s' % container_names(tostop)
   print 'To start: %s' % container_names(tostart)
-  logger.log("tostop", container_names(tostop))
-  logger.log("tostart", container_names(tostart))
+  if useLogger:
+    logger.log("tostop", container_names(tostop))
+    logger.log("tostart", container_names(tostart))
 
   for c in tostop:
     docker["pause"].popen(c)
@@ -123,6 +130,7 @@ while True :
   for c in tostart:
     docker["start"].popen(c)
     docker["unpause"].popen(c)
-  
-  logger.flush()
+
+  if useLogger:
+    logger.flush()
 
