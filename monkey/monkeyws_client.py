@@ -27,11 +27,7 @@ class GHClient(WebSocketClient):
 
 
 print "Starting client"
-ws = GHClient('ws://localhost:8099/')
+ws = GHClient('ws://131.254.14.9:8099/')
 print "Waiting for server..."
-while True:
-    try:
-        ws.connect()
-    except Exception:
-        continue
+ws.connect()
 print "Connected"
