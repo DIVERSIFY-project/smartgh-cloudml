@@ -25,9 +25,10 @@ class GHClient(WebSocketClient):
     def push(self, data):
         self.send(data)
 
-
-print "Starting client"
-ws = GHClient('ws://131.254.14.9:8099/')
-print "Waiting for server..."
-ws.connect()
-print "Connected"
+def connect(ipaddress):
+	print "Starting client"
+	print 'ws://'+ipaddress+':8099/'
+	ws = GHClient('ws://'+ipaddress+':8099/')
+	print "Waiting for server..."
+	ws.connect()
+	print "Connected"

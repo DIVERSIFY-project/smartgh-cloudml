@@ -25,7 +25,7 @@ alive_time = dict()
 try:
   config_file_path = sys.argv[-1]
   if config_file_path.endswith('py'):
-    raise Exception('need a yaml file')
+    raise Exception('config file needs to be a .yaml file')
 except:
   config_file_path = './conf.yaml'
 
@@ -36,7 +36,13 @@ interval = config['interval']
 if '-i' in sys.argv:
   interval = sys.argv[sys.argv.index('-i')+1]
 
+if '-a' in sys.argv:
+  ipaddress = sys.argv[sys.argv.index('-a')+1]
+else:
+  ipaddress = 'localhost'
+  print 'No IP address specified (use -a), using localhost'
 
+monkeyws_client.connect(ipaddress)
 
 func_trail = resolve_func(config['failure'])
 func_rescue = resolve_func(config['recovery'])
