@@ -14,7 +14,8 @@ import sys
 import time
 import datetime
 from monkeylog import Logger
-
+from kazoo.client import KazooClient
+import random 
 useLogger = False
 
 docker = local["docker"]
@@ -24,7 +25,7 @@ alive_time = dict()
 
 try:
   config_file_path = sys.argv[-1]
-  if config_file_path.endswith('py'):
+  if not config_file_path.endswith('yaml'):
     raise Exception('config file needs to be a .yaml file')
 except:
   config_file_path = './conf.yaml'
@@ -42,7 +43,14 @@ else:
   ipaddress = 'localhost'
   print 'No IP address specified (use -a), using localhost'
 
-monkeyws_client.connect(ipaddress)
+if '-z' in sys.argv:
+  monkey_id = '%032x' % random.getrandbits(128) 
+  zookeeper_addr = sys.argv[sys.argv.index('-z')+1]
+  zookeeper = KazooClient(hosts=zookeeper_addr)
+  zookeeper.start()
+  zookeeper.ensure_path('monkey/%s/tick' % monkey_id)  
+
+#monkeyws_client.connect(ipaddress)
 
 func_trail = resolve_func(config['failure'])
 func_rescue = resolve_func(config['recovery'])
@@ -69,6 +77,16 @@ while True :
       sleep(0.1)
       if monkeyws_client.tick:
         monkeyws_client.tick = False
+        break
+  elif interval == "tick_zookeeper":
+    if not zookeeper:
+      print "Zookeeper address is not set-up. Use  -z host:port"
+      exit()
+    while True:
+      sleep(0.1)
+      if zookeeper.get('/monkey/%s/tick'%monkey_id)[0]==b't':
+        zookeeper.set('/monkey/%s/tick'%monkey_id, b't')
+        print 'got a tick from zookeeper'
         break
   elif interval == "tick_keyboard":
     raw_input("press <Enter> to continue...")
